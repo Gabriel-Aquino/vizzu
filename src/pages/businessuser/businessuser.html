@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar class="top-nav">
+
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Cadastre seu Estabelecimento!</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="content-top">
+  </div>
+  <div class="filter">
+        <ion-item>
+          <ion-label floating required>Nome Fantasia</ion-label>
+          <ion-input class="input-form-cad" type="text" [(ngModel)]="nome"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating required>CPF/CNPJ</ion-label>
+          <ion-input color="{{warning}}" type="text" [(ngModel)]="cpfcnpj" (ngModelChange)="TestaCPF($event)" [brmasker]="{person: true}">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Endereço</ion-label>
+          <ion-input type="text" [(ngModel)]="end"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating required>Telefone</ion-label>
+          <ion-input type="text" [(ngModel)]="tel" [brmasker]="{phone: true}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating required>Estado</ion-label>
+          <ion-select [(ngModel)]="state" (ionChange)="selectcity($event)">
+              <ion-option *ngFor="let estado of estados" value="{{estado.initial}}">{{estado.name}}</ion-option>
+            </ion-select>
+      
+        </ion-item>
+        <ion-item>
+            <ion-label floating required>Cidade</ion-label>
+            <ion-select [(ngModel)]="city">
+            <ion-option *ngFor="let cidade of cidades" value="{{cidade.key}}" >{{cidade.name}}</ion-option>
+          </ion-select>
+          </ion-item>
+        <br>
+        <button ion-button full [disabled]="!btnvalidate" class="save-button"
+          (click)="salvar(nome, cpfcnpj, end, tel, state, city)">SALVAR</button>
+        <button ion-button full color="secondary" (click)="update()">ATUALIZAR</button>
+  </div>
+
+</ion-content>

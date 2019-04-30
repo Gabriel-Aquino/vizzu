@@ -1,0 +1,57 @@
+<ion-header class="top-nav">
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title class="text-nav">Olá, {{info}}!</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+<div class="content-top">
+  </div>
+  <ion-grid class="filter">
+    <ion-row >
+      <ion-col col-6>
+        <ion-select placeholder="Avaliação" class="select-filter">
+          <ion-option value="1">1</ion-option>
+          <ion-option value="2">2</ion-option>
+          <ion-option value="3">3</ion-option>
+          <ion-option value="4">4</ion-option>
+          <ion-option value="5">5</ion-option>
+        </ion-select>
+      </ion-col>
+      <ion-col col-6>
+      <ion-select placeholder="Categoria" class="select-filter-2">
+        <ion-option value="1">Masculino</ion-option>
+        <ion-option value="2">Feminino</ion-option>
+      </ion-select>
+    </ion-col>
+      <button class="button-map" (click)="maps()">Ir ao mapa!</button>
+    </ion-row>
+  </ion-grid>
+
+
+
+  <div class="card-background-page">
+  <div>
+    <ion-card>
+      <!--button *ngFor="let list of database"
+            (click)="salaoSelected(list.payload.key,list.payload.val().nome,list.payload.val().end,
+            list.payload.val().tel,list.payload.val().estado,list.payload.val().cidade)">
+            <ion-item>
+              <ion-card-title>
+                {{list.payload.val().nome}}
+                </ion-card-title>  
+              <img src="/assets/imgs/salao.jpg">
+              </ion-item>
+            <p>Endereço: {{list.payload.val().end}}</p>
+            <p>Contato: {{list.payload.val().tel}}</p>
+            <p>Localização: {{list.payload.val().cidade}} - {{list.payload.val().estado}}</p>
+          </button-->
+    </ion-card>
+  </div>
+</div>
+
+
+</ion-content>
