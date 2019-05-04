@@ -35,7 +35,6 @@
           <ion-select [(ngModel)]="state" (ionChange)="selectcity($event)">
               <ion-option *ngFor="let estado of estados" value="{{estado.initial}}">{{estado.name}}</ion-option>
             </ion-select>
-      
         </ion-item>
         <ion-item>
             <ion-label floating required>Cidade</ion-label>
@@ -43,10 +42,17 @@
             <ion-option *ngFor="let cidade of cidades" value="{{cidade.key}}" >{{cidade.name}}</ion-option>
           </ion-select>
           </ion-item>
+          <ion-item>
+            <ion-label floating required>Categoria</ion-label>
+            <ion-select [(ngModel)]="cat">
+            <ion-option value="M">Masculino</ion-option>
+            <ion-option value="F">Feminino</ion-option>
+          </ion-select>
+          </ion-item>
         <br>
         <button ion-button full [disabled]="!btnvalidate" class="save-button"
           (click)="salvar(nome, cpfcnpj, end, tel, state, city)">SALVAR</button>
-        <button ion-button full color="secondary" (click)="update()">ATUALIZAR</button>
   </div>
 
 </ion-content>
+

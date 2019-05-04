@@ -60,18 +60,9 @@ export class LoginPage {
     }
   }
 
-  loginWithApp() {
-    if(localStorage.getItem("uid") != null){
-      this.navCtrl.setRoot(HomePage);
-    }else{
-      this.afAuth.auth.setPersistence(auth.Auth.Persistence.SESSION).then(()=>{
-        return this.afAuth.auth.signInWithPopup(new auth.EmailAuthProvider()).then((info)=>{
-          this.db.list("usuarios/"+info.user.uid).set("info", info.additionalUserInfo).then(()=>{
-            localStorage.setItem("uid", info.user.uid),
-            this.navCtrl.setRoot(HomePage);
-          })
-        })
-      })
-    }
+  loginWithApp(email, senha) {
+      this.afAuth.auth.signInWithEmailAndPassword(email, senha).then(()=>{
+        this.navCtrl.setRoot(HomePage);
+      });
   }
 }

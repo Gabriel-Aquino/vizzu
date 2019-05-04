@@ -64,7 +64,6 @@ ngOnInit() {
         name: estado.payload.val().name
       })
     })
-    console.log(this.estados)
   })
 }
 
@@ -78,7 +77,6 @@ selectcity(event){
         name: cidade.payload.val()
       })
     })
-    console.log(this.cidades)
   })
 }
 
@@ -90,7 +88,6 @@ editar(list) {
   this.estados = list.payload.val().estado;
   this.cidades = list.payload.val().cidade;
   this.key = list.key;
-  console.log(this.key);
 }
 
 update(){
@@ -106,7 +103,7 @@ TestaCPF(cpf: string) {
   var Resto;
   Soma = 0;
   let strCPF: string = cpf.replace(/[^\d]+/g, '')
-  console.log(strCPF)
+  
   if (strCPF.length == 11) {
     if (strCPF == "00000000000") { console.log() };
 

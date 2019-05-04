@@ -53,7 +53,7 @@ export class HomePage {
 
   ngOnInit(): void {
     this.db.list('usuarios/'+localStorage.getItem('uid')).valueChanges().subscribe((info:any)=>{
-      console.log(this.info = info);
+      this.info = info[0].profile;
     });
     this.db.list('usuarios/'+localStorage.uid+'/info').valueChanges().subscribe((data)=>{
       this.database = data

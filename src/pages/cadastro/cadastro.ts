@@ -44,8 +44,8 @@ export class CadastroPage {
       console.log(error.message);
     }).then(()=>{
       return this.afAuth.auth.signInWithEmailAndPassword(email, senha).then((info)=>{
-        this.db.list('usuarios/'+info.user.id).set("info", info.additionalUserInfo).then(()=>{
-          localStorage.setItem("uid", info.user.uid),
+        this.db.list('usuarios/'+info.uid).set("info", info.additionalUserInfo).then(()=>{
+          localStorage.setItem("uid", info.uid),
           this.navCtrl.setRoot(HomePage);
         });
       });

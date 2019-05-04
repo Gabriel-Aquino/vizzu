@@ -19,15 +19,15 @@
         <ion-label floating>
           E-mail
         </ion-label>
-        <ion-input class="form-input"></ion-input>
+        <ion-input class="form-input" [(ngModel)]="email"></ion-input>
       </ion-item>
       <ion-item class="form-label">
         <ion-label floating>
           Senha
         </ion-label>
-        <ion-input class="form-input" type="password"></ion-input>
+        <ion-input class="form-input" type="password" [(ngModel)]="senha"></ion-input>
       </ion-item>
-      <button ion-button class="login-button" full>Entrar</button>
+      <button ion-button class="login-button" full (click)="loginWithApp(email, senha)">Entrar</button>
       <button ion-button class="google-button" (click)="loginWithGoogle()">
         <img src="../../assets/imgs/google-logo.png" class="google-icon">
         Google
