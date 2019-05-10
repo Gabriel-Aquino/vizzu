@@ -28,9 +28,6 @@ export class LoginPage {
   }
 
   loginWithGoogle() {
-    if(localStorage.getItem("uid") != null){
-      this.navCtrl.setRoot(HomePage);
-    }else{
       this.afAuth.auth.setPersistence(auth.Auth.Persistence.SESSION).then(()=>{
         return this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((info)=>{
           this.db.list("usuarios/"+info.user.uid).set("info", info.additionalUserInfo).then(()=>{
@@ -42,22 +39,20 @@ export class LoginPage {
           })
         })
       })
-    }
   }
 
   loginWithFacebook() {
-    if(localStorage.getItem("uid") != null){
-      this.navCtrl.setRoot(HomePage);
-    }else{
       this.afAuth.auth.setPersistence(auth.Auth.Persistence.SESSION).then(()=>{
         return this.afAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then((info)=>{
           this.db.list("usuarios/"+info.user.uid).set("info", info.additionalUserInfo).then(()=>{
+            this.db.list("usuarios/"+info.user.uid+"/info").update("profile", {
+              "typeuser": "consumidor"
+            });
             localStorage.setItem("uid", info.user.uid),
             this.navCtrl.setRoot(HomePage);
           })
         })
       })
-    }
   }
 
   loginWithApp(email, senha) {
