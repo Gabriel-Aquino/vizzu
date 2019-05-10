@@ -33,7 +33,9 @@ export class HomePage {
       var object: any[] = this.object(payload);
       object.map(dado=>{
         if(payload[dado].info.salao){
-        this.database.push(payload[dado]);
+          this.getEndereco(payload[dado].info.salao.cidade,payload[dado].info.salao.estado).then((resp)=>{
+            this.database.push({items:payload[dado],endereco:resp + " - " + payload[dado].info.salao.estado });
+          })
         console.log(this.database);
         } 
       })
@@ -63,10 +65,15 @@ export class HomePage {
     });
   }
 
-  getEndereco(cidade, estado){
-    console.log(cidade, estado)
-    this.db.list('cidades/'+estado).snapshotChanges().subscribe((city)=>{
-      console.log(city);
+  getEndereco(cidade, estado):Promise<any>{
+    return new Promise((resp,rej)=>{
+      this.db.list("cidades/"+estado).snapshotChanges().subscribe((city)=>{
+        resp(city[cidade].payload.val());
     })
+})
+  
+   
   }
+
+
 }

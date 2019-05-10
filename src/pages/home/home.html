@@ -39,13 +39,13 @@
       <button *ngFor="let list of database">
             <ion-item>
               <ion-card-title>
-                  {{list.info.salao.nome}}
+                  {{list.items.info.salao.nome}}
                 </ion-card-title>  
               <img src="/assets/imgs/salao.jpg">
               </ion-item>
-            <p>Endereço: {{list.info.salao.end}}</p>
-            <p>Contato: {{list.info.salao.tel}}</p>
-            <p>Localização: {{getEndereco(list.info.salao.cidade, list.info.salao.estado)}}</p>
+            <p>Endereço: {{list.items.info.salao.end}}</p>
+            <p>Contato: {{list.items.info.salao.tel}}</p>
+            <p>Localização: {{list.endereco}}</p>
           </button>
     </ion-card>
   </div>
