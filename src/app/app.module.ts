@@ -20,6 +20,8 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { MapsPage} from '../pages/maps/maps';
 import { ShowdetailPage } from '../pages/showdetail/showdetail';
+import { AgendamentoPage } from '../pages/agendamento/agendamento';
+import { MainAgendPage } from '../pages/main-agend/main-agend';
 
 export const firebaseConfig ={
   apiKey: "AIzaSyC86zmYLnopKJXSgH1MIft4BLa_KkDORYQ",
@@ -38,7 +40,9 @@ export const firebaseConfig ={
     MapsPage,
     BusinessuserPage,
     SignOutPage,
-    ShowdetailPage
+    ShowdetailPage,
+    AgendamentoPage,
+    MainAgendPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,9 @@ export const firebaseConfig ={
     MapsPage,
     BusinessuserPage,
     SignOutPage,
-    ShowdetailPage
+    ShowdetailPage,
+    AgendamentoPage,
+    MainAgendPage
   ],
   providers: [
     StatusBar,

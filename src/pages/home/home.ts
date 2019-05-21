@@ -2,7 +2,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MapsPage } from './../maps/maps';
-import { ShowdetailPage } from '../showdetail/showdetail';
+import { AgendamentoPage } from '../agendamento/agendamento';
 
 export interface Info {
   name: string;
@@ -34,7 +34,7 @@ export class HomePage {
       object.map(dado=>{
         if(payload[dado].info.salao){
           this.getEndereco(payload[dado].info.salao.cidade,payload[dado].info.salao.estado).then((resp)=>{
-            this.database.push({items:payload[dado],endereco:resp + " - " + payload[dado].info.salao.estado });
+            this.database.push({items:payload[dado],endereco:resp + " - " + payload[dado].info.salao.estado,key:dado });
           })
         console.log(this.database);
         } 
@@ -52,17 +52,8 @@ export class HomePage {
     });
   }
 
-  salaoSelected(key, nome, end, tel, estado, cidade) {
-    //console.log(key, nome, end, tel, estado, cidade);
-
-    this.navCtrl.push(ShowdetailPage, {
-      key: key,
-      nome: nome,
-      end: end,
-      tel: tel,
-      estado: estado,
-      cidade: cidade
-    });
+  salaoSelected(data) {
+    this.navCtrl.push(AgendamentoPage, {data});
   }
 
   getEndereco(cidade, estado):Promise<any>{

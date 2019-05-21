@@ -1,4 +1,4 @@
-<ion-header class="top-nav">
+<ion-header>
   <ion-navbar>
       <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
@@ -31,21 +31,21 @@
     </ion-row>
   </ion-grid>
 
-
-
   <div class="card-background-page">
   <div>
     <ion-card>
-      <button *ngFor="let list of database">
+      <button *ngFor="let list of database"
+      (click)="salaoSelected(list)">
             <ion-item>
-              <ion-card-title>
+              <ion-card-title class="card-title">
                   {{list.items.info.salao.nome}}
                 </ion-card-title>  
-              <img src="/assets/imgs/salao.jpg">
-              </ion-item>
-            <p>Endereço: {{list.items.info.salao.end}}</p>
-            <p>Contato: {{list.items.info.salao.tel}}</p>
-            <p>Localização: {{list.endereco}}</p>
+              <img class="img-salon" src="/assets/imgs/salao.jpg">
+              <br>
+            <p class="card-subtitle"><b>Endereço: </b>{{list.items.info.salao.end}}</p>
+            <p class="card-subtitle"><b>Contato: </b>{{list.items.info.salao.tel}}</p>
+            <p class="card-subtitle"><b>Localização: </b>{{list.endereco}}</p>
+          </ion-item>
           </button>
     </ion-card>
   </div>
