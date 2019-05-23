@@ -9,6 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from './../pages/login/login';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { MainAgendPage } from '../pages/main-agend/main-agend';
 
 
 
@@ -22,8 +23,8 @@ export class MyApp {
   pages: Array<{ title: string, component: any }>;
   database: any;
   user: any;
-
   typeuser: any;
+
   constructor(
     private platform: Platform,
     private statusBar: StatusBar,
@@ -36,17 +37,22 @@ export class MyApp {
       splashScreen.hide();  
 
       this.db.list('usuarios/'+localStorage.getItem("uid")+'/info/profile').snapshotChanges().subscribe((type)=>{
-        console.log(type);
         for(var i = 0; i < type.length; i++){
-          this.typeuser = type[i].payload.val();
+          if(type[i].payload.val() == "consumidor"){
+            this.typeuser = type[i].payload.val();
+          }
+        }
+        console.log(this.typeuser);
+        if (localStorage.getItem("uid") != null && localStorage.getItem("uid") && this.typeuser == "empreendedor") {
+          this.rootPage = MainAgendPage;
+        } else if(localStorage.getItem("uid") != null && localStorage.getItem("uid") && this.typeuser == "consumidor"){
+          this.rootPage = HomePage;
+        }else{
+          this.rootPage = LoginPage;
         }
       })
 
-      if (localStorage.getItem("uid") != null && localStorage.getItem("uid")) {
-        this.rootPage = HomePage;
-      } else {
-        this.rootPage = LoginPage;
-      }
+     
     });
 
 
