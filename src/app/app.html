@@ -5,6 +5,7 @@
       </ion-toolbar>
     </ion-header>
 
+<<<<<<< HEAD
     <ion-content>
       <ion-list>
         <img src="">
@@ -15,5 +16,16 @@
     </ion-content>
   </ion-menu>
 
+=======
+        <ion-content>
+          <ion-list>
+            <img src="">
+            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+>>>>>>> 0021ebf3ca20b8c39fc744e093a27ac5ae386886
 
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
