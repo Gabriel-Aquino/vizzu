@@ -51,7 +51,7 @@ page-home{
     border-radius: 50px 50px;
     background-color:transparent;
     font-weight: bolder;
-    font-size: 13px;
+    font-size: 17px;
     color: black;
     bottom: 10px;
 }
@@ -63,41 +63,41 @@ page-home{
 
     ion-card {
       position: relative;
-      text-align: center;
     }
     .card-title {
-        position: absolute;
-        top: 30%;
-        font-size: 2.5em;
-        width: 100%;
-        font-weight: bold;
-        color: #fff;
-      }
+      position: absolute;
+      top: 30%;
+      font-size: 40px;
+      text-align: center;
+      font-weight: bold;
+      color: black;;
+    }
       .card-subtitle {
-        font-size: 2.0em;
-        position: absolute;
-        top: 50%;
-        width: 80%;
-        left: 10%;
-        color: #fff;
+        font-size: 13px;
+        position: relative;
+        color: black;
+        text-align: center;
       }
-    
-      .card-subtitle-1 {
-        font-size: 1.0em;
+
+      .card-subtitle-3 {
+        font-size: 27px;
         position: absolute;
-        top: 68%;
-        width: 80%;
-        left: 10%;
-        color: #fff;
+        width: 90%;
+        height: 45px;
+        right: 25%;
+        top: 48%;
+        border-radius: 50px 50px;
+        background-color:transparent;
+        font-weight: bolder;
+        color: rgb(42, 152, 172);
+        text-shadow: 1px 1px 0 rgb(12, 12, 12), 2px 2px 0 #000;
+        bottom: 10px;
       }
-      .card-subtitle-2 {
-        font-size: 1.0em;
-        position: absolute;
-        top: 83%;
-        left: 10%;
-        width: 80%;
-        color: #fff;
-      }
+
+      .img-salon{
+        width: 100%;
+        border-radius: 7px 7px;
+    }
 }
 
 .agendar-button{
@@ -113,6 +113,12 @@ page-home{
     font-weight: bolder;
     font-size: 15px;
 }
+
+.card-home{
+  position: relative;
+  display: inline;
+}
+
 
 .menu-toggle{
     position: relative;

@@ -1,6 +1,7 @@
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 
 export interface Info {
@@ -26,6 +27,7 @@ export class BusinessuserPage {
   database: any;
   cidades:any[]=[];
   estados:any[]=[];
+  cat: any;
   key: any;
 
   constructor(
@@ -39,20 +41,18 @@ export class BusinessuserPage {
         this.info = info[0].profile;
       })
     }
-
     updateUser(){
       this.db.list('usuários/'+localStorage.getItem('uid')+'/info/profile/').update("typeuser", {
-
       })
-
 }*/
-salvar(nome, cpfcnpj, end, tel, estado, cidade) {
+salvar(nome, cpfcnpj, end, tel, estado, cidade, cat) {
   this.db.list('usuarios/'+localStorage.uid).update('info/salao', {
-    "nome": nome, cpfcnpj, end, tel, estado, cidade
+    "nome": nome, cpfcnpj, end, tel, estado, cidade, cat
   }).then(()=>{
     this.db.list("usuarios/"+localStorage.uid+"/info").update('profile', {
       "typeuser": "empreendedor"
     });
+    this.navCtrl.setRoot(HomePage);
   })
 }
 
@@ -87,6 +87,7 @@ editar(list) {
   this.tel = list.payload.val().tel;
   this.estados = list.payload.val().estado;
   this.cidades = list.payload.val().cidade;
+  this.cat = list.payload.val().cat;
   this.key = list.key;
 }
 

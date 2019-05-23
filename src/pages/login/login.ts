@@ -28,14 +28,25 @@ export class LoginPage {
   }
 
   loginWithGoogle() {
+    //info.additionalUserInfo adiciona o nó /profile do usuario
       this.afAuth.auth.setPersistence(auth.Auth.Persistence.SESSION).then(()=>{
         return this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((info)=>{
           this.db.list("usuarios/"+info.user.uid).set("info", info.additionalUserInfo).then(()=>{
-            this.db.list("usuarios/"+info.user.uid+"/info").update("profile", {
-              "typeuser": "consumidor"
-            });
-            localStorage.setItem("uid", info.user.uid),
-            this.navCtrl.setRoot(HomePage);
+            this.db.list("usuarios/"+info.user.uid).snapshotChanges().subscribe((olduser)=>{
+              if(olduser[0].payload.val().isNewUser == false){
+                console.log("Entrou no if 1");
+                localStorage.setItem("uid", info.user.uid),
+                this.navCtrl.setRoot(HomePage);
+              }else{
+                console.log("Entrou no if 2");
+                this.db.list("usuarios/"+info.user.uid+"/info").update("profile", {
+                  "typeuser": "consumidor"
+                });
+                localStorage.setItem("uid", info.user.uid),
+                this.navCtrl.setRoot(HomePage);
+              }
+            })
+            
           })
         })
       })

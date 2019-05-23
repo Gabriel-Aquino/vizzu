@@ -1,3 +1,140 @@
 page-showdetail {
 
-}
+
+    .top-nav {
+        width: 100%;
+        background-color: #2fa9fe;
+        background-image: linear-gradient(141deg, #2fa9fe 0%, #2dcaff 51%, #2dcaff 75%);
+        opacity: 0.95;
+    }   
+    
+    .content-top{
+        background-color: #2fa9fe;
+        background-image: linear-gradient(141deg, #2fa9fe 0%, #2dcaff 51%, #2dcaff 75%);
+        color: white;
+        opacity: 0.95;
+        width: 100%;
+        height: 20%;
+        position: relative;
+    }
+    
+    .filter{
+        width: 95%;
+        height: 15%;
+        //background-color: #fcfcfc;
+        margin-top: -14%;  
+        border-radius: 2% 2% 2% 2%;
+        border: 1px solid #f4f4f4;
+        font-weight: bolder;
+        font-size: 15px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        background: #fff;
+        z-index: 9999;
+        position: relative;
+    }
+    
+    .select-filter{
+       position: relative;
+       font-size: 10px;
+       width: 100%;
+    }
+    .select-filter-2{
+        position: relative;
+        font-size: 10px;
+        float: rightleft;
+    
+    }
+    .button-map{
+        position: absolute;
+        width: 90%;
+        height: 35px;
+        left: 5%;
+        border-radius: 50px 50px;
+        background-color:transparent;
+        font-weight: bolder;
+        font-size: 13px;
+        color: black;
+        bottom: 10px;
+    }
+    .list{
+        list-style-type: none;
+    }
+    
+    .card-background-page {
+    
+        ion-card {
+          position: relative;
+          text-align: center;
+        }
+        .card-title {
+            position: absolute;
+            top: 30%;
+            font-size: 2.5em;
+            width: 100%;
+            font-weight: bold;
+            color: #fff;
+          }
+          .card-subtitle {
+            font-size: 2.0em;
+            position: absolute;
+            top: 50%;
+            width: 80%;
+            left: 10%;
+            color: #fff;
+          }
+        
+          .card-subtitle-1 {
+            font-size: 1.0em;
+            position: absolute;
+            top: 68%;
+            width: 80%;
+            left: 10%;
+            color: #fff;
+          }
+          .card-subtitle-2 {
+            font-size: 1.0em;
+            position: absolute;
+            top: 83%;
+            left: 10%;
+            width: 80%;
+            color: #fff;
+          }
+          .card-subtitle-3 {
+            font-size: 27px;
+            position: absolute;
+            width: 90%;
+            height: 35px;
+            left: 9%;
+            top: 48%;
+            border-radius: 50px 50px;
+            background-color:transparent;
+            font-weight: bolder;
+            color: rgb(42, 152, 172);
+            text-shadow: 1px 1px 0 #fff, 2px 2px 0 #000;
+            bottom: 10px;
+          }
+    
+          
+    }
+    
+    .agendar-button{
+        border-radius: 50px 50px;
+        background-color: #2dbeff;
+        font-weight: bolder;
+        font-size: 15px;
+    }
+    .detail-button{
+        border-radius: 50px 50px;
+        background-color: transparent;
+        border: thin solid white;
+        font-weight: bolder;
+        font-size: 15px;
+    }
+    
+    .menu-toggle{
+        position: relative;
+        top: 5px;
+        background-color: Transparent;
+    }
+    
+    }

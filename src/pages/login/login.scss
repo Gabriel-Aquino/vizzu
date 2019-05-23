@@ -1,130 +1,130 @@
 page-login {
-  .content-top{
-      background-color: #2dbeff;
+    .content-top{
+        background-color: #2dbeff;
+        width: 100%;
+        height: 290px;
+        position: absolute;
+    }
+  
+    .content-form{
+        width: 80%;
+        height: 330px;
+        background-color: #fcfcfc;
+        position: absolute;
+        top: -90px;
+        right: auto;
+        left: 40px;
+        border-radius: 2% 2% 2% 2%;
+        border: 1px solid #f4f4f4;
+        font-weight: bolder;
+        font-size: 15px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+  
+    .content{
+        background-color: #f9f9f9;
+  
+    }
+    .content-buttom{
+      top: 310px;
       width: 100%;
-      height: 290px;
+      height: 310px;
       position: absolute;
+      //border: solid 1px red;
+    }
+  
+    .form-label{
+        width: 96%;
+        top: 5px;
+        color: #d6d6d6;
+    }
+  
+    .form-input{
+        width: 96%;
+        left: 50px;
+        top: 5px;
+        color: black;
+    }
+  
+    .logo{
+        width: 120px;
+        position: absolute;
+        left: 35%;
+        top: 40px;
+    }
+  
+    .login-button{
+        position: relative;
+        top: 5%;
+        left: 15%;
+        width: 70%;
+        border-radius: 50px 50px;
+        background-color: #2dbeff;
+        font-weight: bolder;
+        font-size: 15px;
+    }
+  
+    .google-button{
+        position: absolute;
+        bottom: 80px;
+        left: 15%;
+        width: 70%;
+        border-radius: 50px 50px;
+        background-color: white;
+        color:black;
+        font-weight: bolder;
+        border-width: n;
+        border-style: solid;
+        border-color: black;
+        font-size: 15px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+    .google-icon{
+        position: relative;
+        width: 10%;
+        right: 10%;
+        bottom: 5%;
+    }
+    .facebook-button{
+        position: absolute;
+        bottom: 30px;
+        left: 15%;
+        width: 70%;
+        border-radius: 50px 50px;
+        background-color: #3b5998;
+        font-weight: bolder;
+        font-size: 15px;
+    }
+    .facebook-icon{
+        position: relative;
+        right: 5%;
+        bottom: 5%;
+    }
+  
+    .register-button{
+        position: absolute;
+        left: 32%;
+        top: 105%;
+        background-color: #f9f9f9;
+        color: black;
+        color: #2dbeff;
+        font-size: 15px;
+        text-decoration: none;
+        padding-bottom: 20%;
+    }
+  
+    .register-icon{
+        position: relative;
+        top: 1px;
+        right: 3%;
+  
+    }
+  
+    .tittle{
+        color: white;
+        position: absolute;
+        font-size: 30px;
+        top: 145px;
+        left: 40%;
+    }
   }
-
-  .content-form{
-      width: 80%;
-      height: 330px;
-      background-color: #fcfcfc;
-      position: absolute;
-      top: -90px;
-      right: auto;
-      left: 40px;
-      border-radius: 2% 2% 2% 2%;
-      border: 1px solid #f4f4f4;
-      font-weight: bolder;
-      font-size: 15px;
-      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  }
-
-  .content{
-      background-color: #f9f9f9;
-
-  }
-  .content-buttom{
-    top: 310px;
-    width: 100%;
-    height: 310px;
-    position: absolute;
-    //border: solid 1px red;
-  }
-
-  .form-label{
-      width: 96%;
-      top: 5px;
-      color: #d6d6d6;
-  }
-
-  .form-input{
-      width: 96%;
-      left: 50px;
-      top: 5px;
-      color: black;
-  }
-
-  .logo{
-      width: 120px;
-      position: absolute;
-      left: 35%;
-      top: 40px;
-  }
-
-  .login-button{
-      position: relative;
-      top: 5%;
-      left: 15%;
-      width: 70%;
-      border-radius: 50px 50px;
-      background-color: #2dbeff;
-      font-weight: bolder;
-      font-size: 15px;
-  }
-
-  .google-button{
-      position: absolute;
-      bottom: 80px;
-      left: 15%;
-      width: 70%;
-      border-radius: 50px 50px;
-      background-color: white;
-      color:black;
-      font-weight: bolder;
-      border-width: n;
-      border-style: solid;
-      border-color: black;
-      font-size: 15px;
-      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  }
-  .google-icon{
-      position: relative;
-      width: 10%;
-      right: 10%;
-      bottom: 5%;
-  }
-  .facebook-button{
-      position: absolute;
-      bottom: 30px;
-      left: 15%;
-      width: 70%;
-      border-radius: 50px 50px;
-      background-color: #3b5998;
-      font-weight: bolder;
-      font-size: 15px;
-  }
-  .facebook-icon{
-      position: relative;
-      right: 5%;
-      bottom: 5%;
-  }
-
-  .register-button{
-      position: absolute;
-      left: 32%;
-      top: 105%;
-      background-color: #f9f9f9;
-      color: black;
-      color: #2dbeff;
-      font-size: 15px;
-      text-decoration: none;
-      padding-bottom: 20%;
-  }
-
-  .register-icon{
-      position: relative;
-      top: 1px;
-      right: 3%;
-
-  }
-
-  .tittle{
-      color: white;
-      position: absolute;
-      font-size: 30px;
-      top: 145px;
-      left: 40%;
-  }
-}
