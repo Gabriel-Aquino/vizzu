@@ -35,7 +35,7 @@
   <div>
     <ion-card>
       <button *ngFor="let list of database"
-      (click)="salaoSelected(list)">
+      (click)="presentActionSheet(list)">
             <ion-item>
               <ion-card-title class="card-title">
                   {{list.items.info.salao.nome}}
