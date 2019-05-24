@@ -10,8 +10,4 @@ import { MainAgendPage } from './main-agend';
     IonicPageModule.forChild(MainAgendPage),
   ],
 })
-<<<<<<< HEAD
 export class MainAgendPageModule {}
-=======
-export class MainAgendPageModule {}
->>>>>>> 0021ebf3ca20b8c39fc744e093a27ac5ae386886

@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the AgendamentoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-agendamento',
@@ -22,8 +15,4 @@ export class AgendamentoPage {
   }
 
   
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 0021ebf3ca20b8c39fc744e093a27ac5ae386886

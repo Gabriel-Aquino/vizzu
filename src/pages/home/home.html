@@ -1,5 +1,4 @@
 <ion-header>
-<<<<<<< HEAD
     <ion-navbar>
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
@@ -50,57 +49,6 @@
             </button>
       </ion-card>
     </div>
-=======
-  <ion-navbar>
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title class="text-nav">Olá, {{info.name}}!</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
-<div class="content-top">
-  </div>
-  <ion-grid class="filter">
-    <ion-row >
-      <ion-col col-6>
-        <ion-select placeholder="Avaliação" class="select-filter">
-          <ion-option value="1">1</ion-option>
-          <ion-option value="2">2</ion-option>
-          <ion-option value="3">3</ion-option>
-          <ion-option value="4">4</ion-option>
-          <ion-option value="5">5</ion-option>
-        </ion-select>
-      </ion-col>
-      <ion-col col-6>
-      <ion-select placeholder="Categoria" class="select-filter-2">
-        <ion-option value="1">Masculino</ion-option>
-        <ion-option value="2">Feminino</ion-option>
-      </ion-select>
-    </ion-col>
-      <button class="button-map" (click)="maps()">Ir ao mapa!</button>
-    </ion-row>
-  </ion-grid>
-
-  <div class="card-background-page">
-  <div>
-    <ion-card>
-      <button *ngFor="let list of database"
-      (click)="presentActionSheet(list)">
-            <ion-item>
-              <ion-card-title class="card-title">
-                  {{list.items.info.salao.nome}}
-                </ion-card-title>  
-              <img class="img-salon" src="/assets/imgs/salao.jpg">
-              <br>
-            <p class="card-subtitle"><b>Endereço: </b>{{list.items.info.salao.end}}</p>
-            <p class="card-subtitle"><b>Contato: </b>{{list.items.info.salao.tel}}</p>
-            <p class="card-subtitle"><b>Localização: </b>{{list.endereco}}</p>
-          </ion-item>
-          </button>
-    </ion-card>
->>>>>>> 0021ebf3ca20b8c39fc744e093a27ac5ae386886
   </div>
   
   

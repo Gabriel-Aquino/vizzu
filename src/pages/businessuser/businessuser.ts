@@ -41,9 +41,12 @@ export class BusinessuserPage {
         this.info = info[0].profile;
       })
     }
+
     updateUser(){
       this.db.list('usuários/'+localStorage.getItem('uid')+'/info/profile/').update("typeuser", {
+
       })
+
 }*/
 salvar(nome, cpfcnpj, end, tel, estado, cidade, cat) {
   this.db.list('usuarios/'+localStorage.uid).update('info/salao', {

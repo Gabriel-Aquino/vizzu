@@ -65,38 +65,6 @@ export class HomePage {
         resp(city[cidade].payload.val());
       })
     })
-<<<<<<< HEAD
-=======
-  }
-
-  presentActionSheet(list) {
-    const actionSheet = this.actionSheetCtrl.create({
-      title: 'Opções do Salão',
-      buttons: [
-        {
-          text: 'Horários Agendados',
-          role: 'destructive',
-          icon: 'calendar',
-          handler: () => {
-        
-          }
-        },{
-          text: 'Novo Agendamento',
-          icon: 'add',
-          handler: () => {
-            this.salaoSelected(list);
-          }
-        },{
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
->>>>>>> 0021ebf3ca20b8c39fc744e093a27ac5ae386886
   }
 
   presentActionSheet(list) {
