@@ -6,7 +6,7 @@ import {CadastroPage} from '../cadastro/cadastro'
 
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { FormGroup } from '@angular/forms';
+
 
 
 @Component({
@@ -14,8 +14,7 @@ import { FormGroup } from '@angular/forms';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  loginForm : FormGroup;
-  loginError: string;
+typeuser: any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -31,36 +30,40 @@ export class LoginPage {
     //info.additionalUserInfo adiciona o nó /profile do usuario
       this.afAuth.auth.setPersistence(auth.Auth.Persistence.SESSION).then(()=>{
         return this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((info)=>{
-          this.db.list("usuarios/"+info.user.uid).set("info", info.additionalUserInfo).then(()=>{
-            this.db.list("usuarios/"+info.user.uid).snapshotChanges().subscribe((olduser)=>{
-              if(olduser[0].payload.val().isNewUser == false){
-                console.log("Entrou no if 1");
-                localStorage.setItem("uid", info.user.uid),
+          this.db.list("usuarios/"+info.user.uid+"/info").snapshotChanges().subscribe((olduser)=>{
+            if(olduser[0].payload.val() != "true"){
+              localStorage.setItem("uid", info.user.uid),
                 this.navCtrl.setRoot(HomePage);
-              }else{
-                console.log("Entrou no if 2");
+            }else{
+              this.db.list("usuarios/"+info.user.uid).set("info", info.additionalUserInfo).then(()=>{
                 this.db.list("usuarios/"+info.user.uid+"/info").update("profile", {
                   "typeuser": "consumidor"
                 });
                 localStorage.setItem("uid", info.user.uid),
                 this.navCtrl.setRoot(HomePage);
-              }
             })
-            
+            }
+          })
           })
         })
-      })
   }
 
   loginWithFacebook() {
       this.afAuth.auth.setPersistence(auth.Auth.Persistence.SESSION).then(()=>{
         return this.afAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then((info)=>{
-          this.db.list("usuarios/"+info.user.uid).set("info", info.additionalUserInfo).then(()=>{
-            this.db.list("usuarios/"+info.user.uid+"/info").update("profile", {
-              "typeuser": "consumidor"
-            });
-            localStorage.setItem("uid", info.user.uid),
-            this.navCtrl.setRoot(HomePage);
+          this.db.list("usuarios/"+info.user.uid+"/info").snapshotChanges().subscribe((faceuser)=>{
+            if(faceuser[0].payload.val() != "true"){
+              localStorage.setItem("uid", info.user.uid),
+              this.navCtrl.setRoot(HomePage);
+            }else{
+              this.db.list("usuarios/"+info.user.uid).set("info", info.additionalUserInfo).then(()=>{
+                this.db.list("usuarios/"+info.user.uid+"/info").update("profile", {
+                  "typeuser": "consumidor"
+                });
+                localStorage.setItem("uid", info.user.uid),
+                this.navCtrl.setRoot(HomePage);
+              })
+            }
           })
         })
       })
