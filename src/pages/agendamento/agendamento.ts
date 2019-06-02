@@ -39,7 +39,7 @@ export class AgendamentoPage {
     this.selecionarHorario();
   }
   histagendamentos(idsalao) {
-    this.navCtrl.push(HistoricoAgendamentosPage, { idsalao });
+    this.navCtrl.push(HistoricoAgendamentosPage, { idsalao, data: this.data });
   }
 
   presentActionSheet(list) {

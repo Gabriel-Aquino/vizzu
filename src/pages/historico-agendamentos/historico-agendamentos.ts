@@ -10,15 +10,16 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class HistoricoAgendamentosPage {
   
-database: any [];
-key:any
-aux1: any [];
+  database: any [];
+  key:any
+  aux1: any [];
+  data: any;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     private db: AngularFireDatabase) {
-
+      this.data = this.navParams.get('data');
   }
 
   ngOnInit() {
