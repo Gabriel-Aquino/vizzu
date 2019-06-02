@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Horários Disponíveis</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <br>
+  <ion-item>
+    <ion-label>Selecione Horário</ion-label>
+    <ion-datetime displayFormat="HH:mm"  minuteValues="0,30" #date pickerFormat="HH mm" [(ngModel)]="myDate"></ion-datetime>
+  </ion-item> 
+  <div padding>
+    <button ion-button round full color="default" (click)="create(date)">Agendar</button>
+  </div>
+</ion-content>
