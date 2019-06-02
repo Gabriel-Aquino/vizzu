@@ -39,7 +39,6 @@ export class HomePage {
           this.getEndereco(payload[dado].info.salao.cidade, payload[dado].info.salao.estado).then((resp) => {
             this.database.push({ items: payload[dado], endereco: resp + " - " + payload[dado].info.salao.estado, key: dado });
           })
-          console.log(this.database);
         }
       })
     });

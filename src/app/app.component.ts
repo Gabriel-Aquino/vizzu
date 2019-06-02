@@ -37,8 +37,12 @@ export class MyApp {
       splashScreen.hide();  
 
       this.db.list('usuarios/'+localStorage.getItem("uid")+'/info/profile').snapshotChanges().subscribe((type)=>{
+        console.log(type);
         for(var i = 0; i < type.length; i++){
           if(type[i].payload.val() == "consumidor"){
+            this.typeuser = type[i].payload.val();
+
+          }else if(type[i].payload.val() == "empreendedor"){
             this.typeuser = type[i].payload.val();
           }
         }
