@@ -1,6 +1,6 @@
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { MapsPage } from './../maps/maps';
 import { AgendamentoPage } from '../agendamento/agendamento';
 import { ActionSheetController } from 'ionic-angular';

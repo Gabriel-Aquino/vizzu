@@ -8,7 +8,7 @@ page-login {
   
     .content-form{
         width: 80%;
-        height: 330px;
+        height: 200px;
         background-color: #fcfcfc;
         position: absolute;
         top: -90px;
@@ -53,20 +53,9 @@ page-login {
         top: 40px;
     }
   
-    .login-button{
-        position: relative;
-        top: 5%;
-        left: 15%;
-        width: 70%;
-        border-radius: 50px 50px;
-        background-color: #2dbeff;
-        font-weight: bolder;
-        font-size: 15px;
-    }
-  
     .google-button{
         position: absolute;
-        bottom: 80px;
+        bottom: 110px;
         left: 15%;
         width: 70%;
         border-radius: 50px 50px;
@@ -87,7 +76,7 @@ page-login {
     }
     .facebook-button{
         position: absolute;
-        bottom: 30px;
+        bottom: 40px;
         left: 15%;
         width: 70%;
         border-radius: 50px 50px;
