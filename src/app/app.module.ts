@@ -22,6 +22,11 @@ import { MapsPage} from '../pages/maps/maps';
 import { ShowdetailPage } from '../pages/showdetail/showdetail';
 import { AgendamentoPage } from '../pages/agendamento/agendamento';
 import { MainAgendPage } from '../pages/main-agend/main-agend';
+import { CalendarModule } from 'ion2-calendar';
+import { AgendamentoAddPage } from '../pages/agendamento-add/agendamento-add';
+import { HistoricoAgendamentosPage } from '../pages/historico-agendamentos/historico-agendamentos';
+
+
 
 export const firebaseConfig ={
   apiKey: "AIzaSyC86zmYLnopKJXSgH1MIft4BLa_KkDORYQ",
@@ -42,7 +47,9 @@ export const firebaseConfig ={
     SignOutPage,
     ShowdetailPage,
     AgendamentoPage,
-    MainAgendPage
+    MainAgendPage,
+    AgendamentoAddPage,
+    HistoricoAgendamentosPage
   ],
   imports: [
     BrowserModule,
@@ -50,7 +57,8 @@ export const firebaseConfig ={
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     CadastroPageModule,
-    BrMaskerModule
+    BrMaskerModule,
+    CalendarModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -62,7 +70,9 @@ export const firebaseConfig ={
     SignOutPage,
     ShowdetailPage,
     AgendamentoPage,
-    MainAgendPage
+    MainAgendPage,
+    AgendamentoAddPage,
+    HistoricoAgendamentosPage
   ],
   providers: [
     StatusBar,

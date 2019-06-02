@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Historico de Agendamentos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!----<div class="content-top">
+      <h3 class="salon-title">Bem vindo ao {{data.items.info.salao.nome}}</h3>
+  </div>-->
+  
+
+  <div>
+     
+    
+      
+  </div>
+
+  <ion-item *ngFor="let list of aux1">
+    
+    <button ion-button item-end (click)="delete(list)"><ion-icon name="trash"></ion-icon></button>
+
+<p>{{list}}</p>
+
+   
+
+
+  </ion-item>
+
+
+</ion-content>

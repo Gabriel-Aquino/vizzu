@@ -1,9 +1,10 @@
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Component } from '@angular/core';
-import { NavController, MenuController } from 'ionic-angular';
+import { NavController, MenuController, LoadingController } from 'ionic-angular';
 import { MapsPage } from './../maps/maps';
 import { AgendamentoPage } from '../agendamento/agendamento';
 import { ActionSheetController } from 'ionic-angular';
+import { HistoricoAgendamentosPage } from '../historico-agendamentos/historico-agendamentos';
 
 export interface Info {
   name: string;
@@ -24,11 +25,14 @@ export class HomePage {
   info = {} as Info;
   database: any[] = [];
   object = Object.keys;
+  loading: any;
 
   constructor(
     public navCtrl: NavController,
     private db: AngularFireDatabase,
-    public actionSheetCtrl: ActionSheetController) {
+    public actionSheetCtrl: ActionSheetController,
+    public loadingCtrl: LoadingController,) {
+      this.presentLoading()
     //FAZ SELECT DOS SALÕES, COLOCA O PAYLOAD NUMA INTERFACE, OBJECT.KEYS PRA FAZER TRATAMENTO
     //OBJECT.MAP PRA TRATAR OS DADOS
     this.db.object('usuarios/').snapshotChanges().subscribe((data) => {
@@ -41,6 +45,7 @@ export class HomePage {
           })
         }
       })
+      this.loading.dismiss()
     });
   }
 
@@ -57,6 +62,10 @@ export class HomePage {
   salaoSelected(data) {
     this.navCtrl.push(AgendamentoPage, { data });
   }
+  histagendamentos(idsalao) {
+    this.navCtrl.push(HistoricoAgendamentosPage, { idsalao });
+  }
+
 
   getEndereco(cidade, estado): Promise<any> {
     return new Promise((resp, rej) => {
@@ -75,7 +84,7 @@ export class HomePage {
           role: 'destructive',
           icon: 'calendar',
           handler: () => {
-        
+            this.histagendamentos(list);
           }
         },{
           text: 'Novo Agendamento',
@@ -95,5 +104,12 @@ export class HomePage {
     actionSheet.present();
   }
 
+
+  presentLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Carregando'
+    });
+    this.loading.present();
+  }
 
 }

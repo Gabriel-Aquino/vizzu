@@ -61,8 +61,12 @@ export class MyApp {
         ];  
         if (localStorage.getItem("uid") != null && localStorage.getItem("uid") && this.typeuser == "empreendedor") {
           this.rootPage = MainAgendPage;
+<<<<<<< HEAD
           console.log("entrou no emp componet.ts")
         } else if(localStorage.getItem("uid") != null && localStorage.getItem("uid") && this.typeuser == "consumidor"){
+=======
+        } else if(localStorage.getItem("uid") != null && localStorage.getItem("uid")){
+>>>>>>> 468ebd6818a686f5f26751279e8fa8fbb65b5b36
           this.rootPage = HomePage;
           console.log("entrou no consu componet.ts")
         }else{
