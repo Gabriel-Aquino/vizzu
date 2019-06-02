@@ -49,7 +49,7 @@ export class MyApp {
         console.log(this.typeuser);
         if (localStorage.getItem("uid") != null && localStorage.getItem("uid") && this.typeuser == "empreendedor") {
           this.rootPage = MainAgendPage;
-        } else if(localStorage.getItem("uid") != null && localStorage.getItem("uid") && this.typeuser == "consumidor"){
+        } else if(localStorage.getItem("uid") != null && localStorage.getItem("uid")){
           this.rootPage = HomePage;
         }else{
           this.rootPage = LoginPage;
