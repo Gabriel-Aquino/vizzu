@@ -20,11 +20,13 @@ export class AgendamentoAddPage {
   
   database: any;
   salao: any;
+  data: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     db: AngularFireDatabase, private alertCtrl: AlertController) {
 
-      this.salao = this.navParams.get('salao')
+      this.salao = this.navParams.get('salao');
+      this.data = this.navParams.get('data');
       this.database = db.object('agendamentos');
 
   }
@@ -34,17 +36,11 @@ export class AgendamentoAddPage {
   }
 
   create(date){
-   
-    let dados = {
-      salao: this.salao.key,
-      horario: date.value,
-      cliente: localStorage.getItem('uid')
-    }
-    this.database.set(dados);
-    this.presentConfirm();
+  
+    this.presentConfirm(date);
   }
 
-  presentConfirm() {
+  presentConfirm(date) {
     let alert = this.alertCtrl.create({
       title: 'Horário selecionado',
       message: 'Deseja confirmar o Agendamento?',
@@ -57,9 +53,16 @@ export class AgendamentoAddPage {
           }
         },
         {
-          text: 'Buy',
+          text: 'Confirmar',
           handler: () => {
-            console.log('Buy clicked');
+            let dados = {
+              salao: this.salao.key,
+              horario: date.value,
+              cliente: localStorage.getItem('uid'),
+              data: this.data
+            }
+            this.database.set(dados);
+            this.navCtrl.pop();
           }
         }
       ]

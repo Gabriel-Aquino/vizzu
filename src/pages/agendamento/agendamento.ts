@@ -55,7 +55,7 @@ export class AgendamentoPage {
   }
 
   selecionarHorario(){
-
+    this.navCtrl.pop();
     this.navCtrl.push(AgendamentoAddPage, {data: this.data, salao: this.salao})
   }
 
