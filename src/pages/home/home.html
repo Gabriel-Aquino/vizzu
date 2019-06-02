@@ -37,11 +37,8 @@
         <button *ngFor="let list of database"
         (click)="presentActionSheet(list)">
               <ion-item>
-                <ion-card-title class="card-subtitle-3">
-                    {{list.items.info.salao.nome}}
-                  </ion-card-title>  
                 <img class="img-salon" src="/assets/imgs/salao.jpg">
-                <br>
+              <p class="card-subtitle-2">{{list.items.info.salao.nome}}</p> 
               <p class="card-subtitle"><b>Endereço: </b>{{list.items.info.salao.end}}</p>
               <p class="card-subtitle"><b>Contato: </b>{{list.items.info.salao.tel}}</p>
               <p class="card-subtitle"><b>Localização: </b>{{list.endereco}}</p>
