@@ -4,6 +4,7 @@ import { AlertController } from 'ionic-angular';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+import { ToastController } from 'ionic-angular';
 /**
  * Generated class for the AgendamentoAddPage page.
  *
@@ -23,7 +24,7 @@ export class AgendamentoAddPage {
   data: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
-    db: AngularFireDatabase, private alertCtrl: AlertController) {
+    public db: AngularFireDatabase, private alertCtrl: AlertController, public toastCtrl: ToastController) {
 
       this.salao = this.navParams.get('salao');
       this.data = this.navParams.get('data');
@@ -36,8 +37,13 @@ export class AgendamentoAddPage {
   }
 
   create(date){
-  
-    this.presentConfirm(date);
+    
+    if(Object.keys(date.value).length != 0){
+      this.presentConfirm(date);
+    }else{
+      this.presentToast();
+    }
+   
   }
 
   presentConfirm(date) {
@@ -61,13 +67,27 @@ export class AgendamentoAddPage {
               cliente: localStorage.getItem('uid'),
               data: this.data
             }
-            this.database.set(dados);
+            this.db.list('agendamentos').push(dados)
+            .then((result: any) => {
+              console.log(result.key);
+            });
+          
             this.navCtrl.pop();
           }
         }
       ]
     });
     alert.present();
+  }
+
+
+  presentToast() {
+    const toast = this.toastCtrl.create({
+      message: 'Selecione um horário!',
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 
 }
