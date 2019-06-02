@@ -12,7 +12,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { MainAgendPage } from '../pages/main-agend/main-agend';
 
 
-export interface Info{
+export interface Info {
   typeuser: string
 }
 
@@ -39,37 +39,35 @@ export class MyApp {
 
     platform.ready().then(() => {
       statusBar.styleDefault();
-      splashScreen.hide();  
+      splashScreen.hide();
 
-      this.db.list('usuarios/'+localStorage.getItem("uid")+'/info/profile').snapshotChanges().subscribe((type)=>{
-        for(var i = 0; i < type.length; i++){
-          if(type[i].payload.val() == "consumidor"){
+      this.db.list('usuarios/' + localStorage.getItem("uid") + '/info/profile').snapshotChanges().subscribe((type) => {
+        for (var i = 0; i < type.length; i++) {
+          if (type[i].payload.val() == "consumidor") {
             this.typeuser = type[i].payload.val();
 
-          }else if(type[i].payload.val() == "empreendedor"){
+          } else if (type[i].payload.val() == "empreendedor") {
             this.typeuser = type[i].payload.val();
-          }else{
+          } else {
             break;
           }
         }
-       this.info = this.typeuser;
+        this.info = this.typeuser;
 
         this.pages = [
           { title: 'Home', component: HomePage },
           { title: 'Comece seu negocio!', component: BusinessuserPage },
           { title: 'Sair!', component: SignOutPage }
-        ];  
+        ];
         if (localStorage.getItem("uid") != null && localStorage.getItem("uid") && this.typeuser == "empreendedor") {
           this.rootPage = MainAgendPage;
-<<<<<<< HEAD
+
           console.log("entrou no emp componet.ts")
-        } else if(localStorage.getItem("uid") != null && localStorage.getItem("uid") && this.typeuser == "consumidor"){
-=======
-        } else if(localStorage.getItem("uid") != null && localStorage.getItem("uid")){
->>>>>>> 468ebd6818a686f5f26751279e8fa8fbb65b5b36
+        } else if (localStorage.getItem("uid") != null && localStorage.getItem("uid") && this.typeuser == "consumidor") {
+        } else if (localStorage.getItem("uid") != null && localStorage.getItem("uid")) {
           this.rootPage = HomePage;
           console.log("entrou no consu componet.ts")
-        }else{
+        } else {
           this.rootPage = LoginPage;
         }
       })
