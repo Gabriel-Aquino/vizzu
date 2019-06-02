@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-<<<<<<< HEAD
+
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
-=======
-import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+
+import {  ActionSheetController } from 'ionic-angular';
 import { CalendarComponentOptions, DayConfig } from "ion2-calendar";
 import { AgendamentoAddPage } from '../agendamento-add/agendamento-add';
 import { ToastController } from 'ionic-angular';
@@ -11,7 +11,6 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Payload } from '../home/home';
 import { HistoricoAgendamentosPage } from '../historico-agendamentos/historico-agendamentos';
->>>>>>> 468ebd6818a686f5f26751279e8fa8fbb65b5b36
 
 @IonicPage()
 @Component({
