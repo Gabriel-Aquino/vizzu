@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { CalendarComponentOptions, DayConfig } from "ion2-calendar";
 import { AgendamentoAddPage } from '../agendamento-add/agendamento-add';
 import { ToastController } from 'ionic-angular';
@@ -7,6 +7,7 @@ import { ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Payload } from '../home/home';
+import { HistoricoAgendamentosPage } from '../historico-agendamentos/historico-agendamentos';
 
 @IonicPage()
 @Component({
@@ -27,11 +28,47 @@ export class AgendamentoPage {
   agendamentos: Observable<any>;
   object = Object.keys;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public db: AngularFireDatabase, public toastCtrl: ToastController) {
+  constructor(public actionSheetCtrl: ActionSheetController,public navCtrl: NavController, public navParams: NavParams, public db: AngularFireDatabase, public toastCtrl: ToastController) {
     this.openCalendar()
     this.salao = this.navParams.get('data')
     this.agendamentos = db.object('agendamentos').valueChanges();
     
+  }
+
+  salaoSelected(data) {
+    this.selecionarHorario();
+  }
+  histagendamentos(idsalao) {
+    this.navCtrl.push(HistoricoAgendamentosPage, { idsalao });
+  }
+
+  presentActionSheet(list) {
+    const actionSheet = this.actionSheetCtrl.create({
+      title: 'Opções do Salão',
+      buttons: [
+        {
+          text: 'Horários Agendados',
+          role: 'destructive',
+          icon: 'calendar',
+          handler: () => {
+            this.histagendamentos(list);
+          }
+        },{
+          text: 'Novo Agendamento',
+          icon: 'add',
+          handler: () => {
+            this.salaoSelected(list);
+          }
+        },{
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
   openCalendar(){
@@ -42,8 +79,7 @@ export class AgendamentoPage {
         tempArray.push(ele.payload.val())
         
       });
-      console.log(tempArray)
-      
+    
     })
     
     let _daysConfig: DayConfig[] = [];
@@ -54,16 +90,21 @@ export class AgendamentoPage {
         tempArray.push(ele.payload.val())
         
       });
-      console.log(tempArray)
+    
       for(let a=0; a< tempArray.length; a++){ 
+
+        let data_dia = new Date(tempArray[a]['data']);
+        data_dia.setDate(data_dia.getDate() + 1);
+        console.log(data_dia)
         _daysConfig.push({
-          date: new Date(tempArray[a][2]),
-          subTitle: `C`,
-          marked: true
+          date: new Date(data_dia),
+          subTitle: `AG`,
+          marked: true,
+          cssClass: 'color-nova'
         })
       }
       this.optionsMulti = {
-        from: new Date("2000-01-01"),
+        from: new Date(),
         weekdays: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
         monthPickerFormat: [
           'JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGU', 'SET', 'OUT','NOV', 'DEZ'
@@ -80,7 +121,7 @@ export class AgendamentoPage {
   funilDetail(dados){
     
     this.data = dados.format('YYYY-MM-DD')
-
+    this.presentActionSheet(this.salao)
    
   }
 
