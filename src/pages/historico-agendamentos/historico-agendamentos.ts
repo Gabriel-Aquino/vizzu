@@ -10,8 +10,10 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class HistoricoAgendamentosPage {
   
-database: any;
+database: any [];
 key:any
+aux1: any [];
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -20,9 +22,16 @@ key:any
   }
 
   ngOnInit() {
-    this.db.list('salao').snapshotChanges().subscribe((data) => {
-      this.database = data
-      console.log(this.database)
+    this.db.list('agendamentos/').valueChanges().subscribe((data) => {
+
+      this.database = data;
+      for(var i = 0; i < this.database.length; i++){
+        this.db.list('usuarios/'+this.database[i].cliente+"/info/profile").valueChanges().subscribe((info) => {
+          this.aux1 = info
+          console.log(this.aux1)
+      });
+      }
+      
     })
   }
 

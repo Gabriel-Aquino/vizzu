@@ -16,10 +16,16 @@
       
   </div>
 
-  <ion-item *ngFor="let list of database">
-      {{database.key}}
+  <ion-item *ngFor="let list of aux1">
+    
     <button ion-button item-end (click)="delete(list)"><ion-icon name="trash"></ion-icon></button>
-  
+
+<p>{{list}}</p>
+
+   
+
+
   </ion-item>
+
 
 </ion-content>
