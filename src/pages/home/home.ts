@@ -4,6 +4,7 @@ import { NavController, LoadingController } from 'ionic-angular';
 import { MapsPage } from './../maps/maps';
 import { AgendamentoPage } from '../agendamento/agendamento';
 import { ActionSheetController } from 'ionic-angular';
+import { HistoricoAgendamentosPage } from '../historico-agendamentos/historico-agendamentos';
 
 export interface Info {
   name: string;
@@ -61,6 +62,10 @@ export class HomePage {
   salaoSelected(data) {
     this.navCtrl.push(AgendamentoPage, { data });
   }
+  histagendamentos(idsalao) {
+    this.navCtrl.push(HistoricoAgendamentosPage, { idsalao });
+  }
+
 
   getEndereco(cidade, estado): Promise<any> {
     return new Promise((resp, rej) => {
@@ -79,7 +84,7 @@ export class HomePage {
           role: 'destructive',
           icon: 'calendar',
           handler: () => {
-        
+            this.histagendamentos(list);
           }
         },{
           text: 'Novo Agendamento',
