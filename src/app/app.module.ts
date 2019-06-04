@@ -8,7 +8,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import {CadastroPageModule} from '../pages/cadastro/cadastro.module'
 
 
 import { AngularFireModule } from 'angularfire2';
@@ -56,7 +55,6 @@ export const firebaseConfig ={
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    CadastroPageModule,
     BrMaskerModule,
     CalendarModule
   ],

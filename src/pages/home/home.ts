@@ -1,10 +1,11 @@
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Component } from '@angular/core';
-import { NavController, MenuController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, App } from 'ionic-angular';
 import { MapsPage } from './../maps/maps';
 import { AgendamentoPage } from '../agendamento/agendamento';
 import { ActionSheetController } from 'ionic-angular';
 import { HistoricoAgendamentosPage } from '../historico-agendamentos/historico-agendamentos';
+
 
 export interface Info {
   name: string;
@@ -31,7 +32,7 @@ export class HomePage {
     public navCtrl: NavController,
     private db: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController,
-    public loadingCtrl: LoadingController,) {
+    public loadingCtrl: LoadingController, public appCtrl: App) {
       this.presentLoading()
     //FAZ SELECT DOS SALÕES, COLOCA O PAYLOAD NUMA INTERFACE, OBJECT.KEYS PRA FAZER TRATAMENTO
     //OBJECT.MAP PRA TRATAR OS DADOS
