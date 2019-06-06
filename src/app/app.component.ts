@@ -3,13 +3,14 @@ import { BusinessuserPage } from './../pages/businessuser/businessuser';
 import { HomePage } from './../pages/home/home';
 
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav } from 'ionic-angular';
+import { Platform, Nav, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from './../pages/login/login';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { MainAgendPage } from '../pages/main-agend/main-agend';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 export interface Info {
@@ -24,8 +25,8 @@ export class MyApp {
   rootPage: any;
 
   pageP: Array<{ title: string, component: any }>;
-  pages1: Array<{ title: string, component: any }>;
-  pages2: Array<{ title: string, component: any }>;
+  // pages1: Array<{ title: string, component: any }>;
+  // pages2: Array<{ title: string, component: any }>;
 
   database: any;
   user: any;
@@ -36,41 +37,36 @@ export class MyApp {
     private platform: Platform,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
-    private db: AngularFireDatabase) {
+    private db: AngularFireDatabase,
+    private afa:AngularFireAuth,
+    public events:Events,
+    ) {
     this.initializeApp();
 
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
-
-      this.db.list('usuarios/' + localStorage.getItem("uid") + '/info/profile/').valueChanges().subscribe((type) => {
-        for (var i = 0; i < type.length; i++) {
-          if (type[i] == "consumidor") {
-            this.pageP = this.pages1 = [
-              { title: 'Home', component: HomePage },
-              { title: 'Comece seu negocio!', component: BusinessuserPage },
-              { title: 'Sair!', component: SignOutPage }
-            ];
-            this.typeuser = type[i];
-          } else if (type[i] == "empreendedor") {
-            this. pageP = this.pages2 = [
-              { title: 'Sair!', component: SignOutPage }
-            ];
-            this.typeuser = type[i];
-          }
-        }
-        this.info = this.typeuser;
+      if(localStorage.getItem("uid")){
+      this.db.object('usuarios/' + localStorage.getItem("uid") + '/info/profile/').snapshotChanges().subscribe((type) => {
+        let info = type.payload.val()
+        console.log(type.payload.val())
+        
+         this.pageP = this.changeMenu(info.typeuser);
+        
+        
         console.log(this.pageP);
 
-        if (localStorage.getItem("uid") != null && localStorage.getItem("uid") && this.typeuser == "empreendedor") {
+        if (localStorage.getItem("uid") != null && localStorage.getItem("uid") && info.typeuser == "empreendedor") {
           this.rootPage = MainAgendPage;
-        } else if (localStorage.getItem("uid") != null && localStorage.getItem("uid") && this.typeuser == "consumidor") {
+        } else if (localStorage.getItem("uid") != null && localStorage.getItem("uid") && info.typeuser == "consumidor") {
           this.rootPage = HomePage;
         } else {
           this.rootPage = LoginPage;
         }
       })
-
+    }else{
+      this.rootPage = LoginPage;
+    }
 
     });
 
@@ -80,10 +76,37 @@ export class MyApp {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.events.subscribe("menu",(data)=>{
+        console.log(data);
+        this.pageP = this.changeMenu(data.typeuser)
+      })
     });
   }
 
   openPage(page) {
     this.nav.setRoot(page.component);
+  }
+
+  exit(){
+    this.afa.auth.signOut().then(()=>localStorage.clear()).then(()=>this.nav.setRoot(LoginPage));
+  }
+
+  changeMenu(type){
+
+    let consumidor = [
+      { title: 'Home', component: HomePage },
+      { title: 'Comece seu negocio!', component: BusinessuserPage },
+      { title: 'Sair!', component: SignOutPage }
+    ];
+
+    let empreendedor = [
+      { title: 'Sair!', component: SignOutPage }
+    ];
+
+    switch(type){
+      case "empreendedor":return empreendedor;
+      case "consumidor": return consumidor;
+    }
+
   }
 }

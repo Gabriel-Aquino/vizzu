@@ -29,10 +29,13 @@ export class AgendamentoAddPage {
       this.data = this.navParams.get('data');
       this.database = db.object('agendamentos');
 
+      
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AgendamentoAddPage');
+    console.log(this.salao)
   }
 
   create(date){
@@ -66,7 +69,7 @@ export class AgendamentoAddPage {
               cliente: localStorage.getItem('uid'),
               data: this.data
             }
-            this.db.list('agendamentos').push(dados)
+            this.db.list('agendamentos/'+this.salao.key).push(dados)
             .then((result: any) => {
               console.log(result.key);
             });
