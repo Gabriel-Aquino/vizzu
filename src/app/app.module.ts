@@ -24,6 +24,7 @@ import { MainAgendPage } from '../pages/main-agend/main-agend';
 import { CalendarModule } from 'ion2-calendar';
 import { AgendamentoAddPage } from '../pages/agendamento-add/agendamento-add';
 import { HistoricoAgendamentosPage } from '../pages/historico-agendamentos/historico-agendamentos';
+import { CadastroPage } from '../pages/cadastro/cadastro';
 
 
 
@@ -48,7 +49,8 @@ export const firebaseConfig ={
     AgendamentoPage,
     MainAgendPage,
     AgendamentoAddPage,
-    HistoricoAgendamentosPage
+    HistoricoAgendamentosPage,
+    CadastroPage
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,8 @@ export const firebaseConfig ={
     AgendamentoPage,
     MainAgendPage,
     AgendamentoAddPage,
-    HistoricoAgendamentosPage
+    HistoricoAgendamentosPage,
+    CadastroPage
   ],
   providers: [
     StatusBar,

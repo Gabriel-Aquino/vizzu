@@ -13,7 +13,7 @@ page-login {
         position: absolute;
         top: -90px;
         right: auto;
-        left: 40px;
+        left: 10%;
         border-radius: 2% 2% 2% 2%;
         border: 1px solid #f4f4f4;
         font-weight: bolder;
@@ -33,16 +33,8 @@ page-login {
       //border: solid 1px red;
     }
   
-    .form-label{
-        width: 96%;
-        top: 5px;
-        color: #d6d6d6;
-    }
-  
     .form-input{
-        width: 96%;
-        left: 50px;
-        top: 5px;
+        width: 100%;
         color: black;
     }
   
@@ -76,7 +68,6 @@ page-login {
     }
     .facebook-button{
         position: absolute;
-        bottom: 40px;
         left: 15%;
         width: 70%;
         border-radius: 50px 50px;
@@ -92,14 +83,13 @@ page-login {
   
     .register-button{
         position: absolute;
-        left: 32%;
         top: 105%;
         background-color: #f9f9f9;
         color: black;
         color: #2dbeff;
         font-size: 15px;
         text-decoration: none;
-        padding-bottom: 20%;
+        border-radius: 50px 50px;
     }
   
     .register-icon{

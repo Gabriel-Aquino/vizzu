@@ -1,12 +1,11 @@
 import { HomePage } from './../home/home';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { auth } from 'firebase/app';  
+import { AngularFireDatabase } from 'angularfire2/database'; 
 
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController, Events } from 'ionic-angular';
+import { NavController, NavParams, Events } from 'ionic-angular';
 import { MainAgendPage } from '../main-agend/main-agend';
-
+import { CadastroPage } from '../cadastro/cadastro';
 
 
 @Component({
@@ -17,31 +16,51 @@ export class LoginPage {
 typeUserFace: any;
 typeUserGoogle: any;
 pages: any;
+error: any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
-    public events:Events,
+    public events:Events
     ) {
   }
 
-  loginWithGoogle() {
-    //info.additionalUserInfo adiciona o nó /profile do usuario
+  cadastro(){
+    this.navCtrl.push(CadastroPage);
+  }  
+
+  loginWithCredentials(email, senha){
+    this.afAuth.auth.signInWithEmailAndPassword(email.value, senha.value).then((infoUser)=>{
+          this.db.object("usuarios/"+infoUser.uid+"/info/profile").snapshotChanges().subscribe((user)=>{
+            console.log(user);
+            let UserInfo = user.payload.val();
+            this.events.publish("menu", UserInfo);
+
+            if(UserInfo.typeuser == "empreendedor"){
+              localStorage.setItem("uid", infoUser.uid);
+              this.navCtrl.setRoot(MainAgendPage)
+            }
+            if(UserInfo.typeuser == "consumidor"){
+              localStorage.setItem("uid", infoUser.uid);
+              this.navCtrl.setRoot(HomePage)
+            }
+          })
+          this.db.list("usuarios/"+infoUser.uid).update("info", {
+            "isNewUser": false
+          })
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
+
+  /*loginWithGoogle() {
+     //info.additionalUserInfo adiciona o nó /profile do usuario
       this.afAuth.auth.setPersistence(auth.Auth.Persistence.SESSION).then(()=>{
         return this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((info)=>{
           if(info.additionalUserInfo.isNewUser == false){
-            // console.log(info)
             this.db.object("usuarios/"+info.user.uid+"/info/profile/").snapshotChanges().subscribe((google)=>{
               let googleInfo = google.payload.val();
-              // for(var i = 0; i < google.length; i++){
-              //   if(google[i] == "empreendedor"){
-              //     this.typeUserGoogle = google[i];
-              //   }else if(google[i] = "consumidor"){
-              //     this.typeUserGoogle = google[i];
-              //   }
-              // }
-
               this.events.publish("menu",googleInfo)
               
               if(googleInfo.typeuser == "empreendedor"){
@@ -73,13 +92,6 @@ pages: any;
           if(info.additionalUserInfo.isNewUser == false){
             this.db.object("usuarios/"+info.user.uid+"/info/profile/").snapshotChanges().subscribe((face)=>{
               let faceInfo = face.payload.val();
-              // for(var i = 0; i < face.length; i++){
-              //   if(face[i] == "empreendedor"){
-              //     this.typeUserFace = face[i];
-              //   }else if(face[i] == "consumidor"){
-              //     this.typeUserFace = face[i];
-              //   }
-              // }
               this.events.publish("menu",faceInfo)
 
               if(faceInfo.typeuser == "empreendedor"){
@@ -105,6 +117,6 @@ pages: any;
         }
         })
       })
-  }
+  }*/
 
 }

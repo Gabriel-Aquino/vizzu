@@ -7,17 +7,30 @@
 <ion-content>
   <div class="content-top">
     <img src="../../assets/imgs/vizzu-logo.png" class="logo">
-    <h1 class="tittle">VIZZU</h1>
   </div>
   <div class="content-buttom">
     <div class="content-form">
-      <button ion-button class="google-button" (click)="loginWithGoogle()">
+        <form>
+            <ion-item>
+                <ion-label stacked>Digite seu e-mail</ion-label>
+                <ion-input class="form-input" type="email" placeholder="E-mail" #email></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label stacked>Digite sua senha</ion-label>
+                  <ion-input class="form-input" type="password" placeholder="Senha" #senha></ion-input>
+                </ion-item>
+                <br>                
+                <button ion-button full class="facebook-button" (click)="loginWithCredentials(email, senha)">Entrar</button>
+          </form>
+      <!--button ion-button class="google-button" (click)="loginWithGoogle()">
         <img src="../../assets/imgs/google-logo.png" class="google-icon">
         Google
       </button>
       <button ion-button class="facebook-button" (click)="loginWithFacebook()">
         <ion-icon name="logo-facebook" class="facebook-icon"></ion-icon>Facebook
-      </button>
+      </button-->
+      <button ion-button full class="register-button" (click)="cadastro()">Cadastre-se</button>
     </div>
     <!---
     -->
