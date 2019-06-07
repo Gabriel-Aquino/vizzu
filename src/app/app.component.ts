@@ -78,7 +78,12 @@ export class MyApp {
       this.splashScreen.hide();
       this.events.subscribe("menu",(data)=>{
         console.log(data);
-        this.pageP = this.changeMenu(data.typeuser)
+        if(data.typeuser){
+          this.pageP = this.changeMenu(data.typeuser)
+        }else{
+          this.pageP = this.changeMenu(data.profile.typeuser)
+        }
+        
       })
     });
   }

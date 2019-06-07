@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { HomePage } from '../home/home';
@@ -19,26 +19,32 @@ import { HomePage } from '../home/home';
 export class CadastroPage {
 errorMain: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  public afAuth: AngularFireAuth, public db: AngularFireDatabase) {
+  public afAuth: AngularFireAuth, public db: AngularFireDatabase,
+  private event:Events
+  
+  ) {
 
   }
 
   submit(nome, email, senha){
     this.afAuth.auth.createUserWithEmailAndPassword(email.value, senha.value).then((infoUser)=>{
-      this.db.list('usuarios/'+infoUser.uid).update("info", {
+      let  user = {
         "isNewUser": true,
         "profile":{
         "name": nome.value,
         "email": email.value,
         "typeuser": "consumidor"
       }
-      }).then(()=>{
+    }
+      this.db.list('usuarios/'+infoUser.uid).update("info",user ).then(()=>{
         localStorage.setItem("uid", infoUser.uid);
         this.navCtrl.setRoot(HomePage)
+        this.event.publish("menu",user);
+
       })
     }).catch((error)=>{
       this.errorMain = error.message;
-      console.log("ajshdjashd")
+      console.log("usuario errado ou nao encontrado")
     })
   }
 
