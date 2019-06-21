@@ -2,7 +2,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
-
+import { Geolocation } from '@ionic-native/geolocation';
 
 export interface Info {
   typeuser: string;
@@ -23,7 +23,7 @@ export class BusinessuserPage {
   cpfcnpj
   end
   tel
-  coords
+  coords = [2];
   database: any;
   cidades:any[]=[];
   estados:any[]=[];
@@ -33,24 +33,17 @@ export class BusinessuserPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private db: AngularFireDatabase) {
+    private db: AngularFireDatabase,
+    private geolocation: Geolocation) {
   }
-  /*
-    ngOnInit(): void {
-      this.db.list('usuarios/'+localStorage.getItem('uid')).valueChanges().subscribe((info:any)=>{
-        this.info = info[0].profile;
-      })
-    }
-
-    updateUser(){
-      this.db.list('usuários/'+localStorage.getItem('uid')+'/info/profile/').update("typeuser", {
-
-      })
-
-}*/
-salvar(nome, cpfcnpj, end, tel, estado, cidade, cat) {
+  
+salvar(nome, cpfcnpj, end, tel, estado, cidade, cat, coords) {
   this.db.list('usuarios/'+localStorage.uid).update('info/salao', {
-    "nome": nome, cpfcnpj, end, tel, estado, cidade, cat
+    "nome": nome, cpfcnpj, end, tel, estado, cidade, cat, 
+    "coords":{
+      "lat": coords[0],
+      "lng": coords[1]
+    }
   }).then(()=>{
     this.db.list("usuarios/"+localStorage.uid+"/info").update('profile', {
       "typeuser": "empreendedor"
@@ -60,6 +53,7 @@ salvar(nome, cpfcnpj, end, tel, estado, cidade, cat) {
 }
 
 ngOnInit() {
+  console.log(this.coords);
   this.db.list('estados').snapshotChanges().subscribe((estados)=>{
     estados.map((estado)=>{
       this.estados.push({
@@ -67,7 +61,18 @@ ngOnInit() {
         name: estado.payload.val().name
       })
     })
-  })
+  });
+}
+
+myLocation(){
+  this.geolocation.getCurrentPosition().then((resp) => {
+   this.coords[0] = resp.coords.latitude;
+    this.coords[1] = resp.coords.longitude;
+    console.log(this.coords[0]);
+    console.log(this.coords[1]);
+   }).catch((error) => {
+     console.log('Error getting location', error);
+   });
 }
 
 selectcity(event){

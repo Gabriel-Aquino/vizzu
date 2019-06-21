@@ -25,7 +25,7 @@ import { CalendarModule } from 'ion2-calendar';
 import { AgendamentoAddPage } from '../pages/agendamento-add/agendamento-add';
 import { HistoricoAgendamentosPage } from '../pages/historico-agendamentos/historico-agendamentos';
 import { CadastroPage } from '../pages/cadastro/cadastro';
-
+import { Geolocation } from '@ionic-native/geolocation';
 
 
 export const firebaseConfig ={
@@ -80,7 +80,8 @@ export const firebaseConfig ={
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireAuth,
-    AngularFireDatabase
+    AngularFireDatabase,
+    Geolocation
   ]
 })
 export class AppModule {}

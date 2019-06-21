@@ -50,7 +50,7 @@ error: any;
             "isNewUser": false
           })
     }).catch((error)=>{
-      console.log(error)
+      this.error = error;
     })
   }
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import {  ActionSheetController } from 'ionic-angular';
 import { CalendarComponentOptions, DayConfig } from "ion2-calendar";
@@ -9,7 +9,6 @@ import { ToastController } from 'ionic-angular';
 
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Payload } from '../home/home';
 import { HistoricoAgendamentosPage } from '../historico-agendamentos/historico-agendamentos';
 
 @IonicPage()

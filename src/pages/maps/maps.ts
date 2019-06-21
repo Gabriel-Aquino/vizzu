@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 declare let google;
 
@@ -9,7 +10,7 @@ declare let google;
 })
 export class MapsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase) {
   this.loadMaps();
   }
 
@@ -39,6 +40,23 @@ export class MapsPage {
           maps.setZoom(18);
           maps.setCenter(marker.getPosition());
         });
+
+      this.db.list("usuarios/").snapshotChanges().subscribe((users)=>{
+        for(var i = 0; i < users.length; i++){
+          this.db.object("usuarios/"+users[i].key+"/info/salao").snapshotChanges().subscribe((user)=>{
+            console.log(user.payload.val());
+            if(user.payload.val() != null){
+              var markerSalon = new google.maps.Marker({
+                position: {lat: user.payload.val().coords.lat, lng: user.payload.val().coords.lng},
+                map: maps,
+                icon: '/assets/imgs/map-marker1.png',
+                title: user.payload.val().nome
+              });
+            }
+            
+          })
+        }
+      }) 
     })
   }
 
