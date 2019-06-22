@@ -2,7 +2,12 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import { Geolocation } from '@ionic-native/geolocation';
+import { AngularFireStorage } from 'angularfire2/storage'
+import { AngularFireAuth } from 'angularfire2/auth';
+import firebase from 'firebase';
+
+import { Camera } from '@ionic-native/camera';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 
 export interface Info {
   typeuser: string;
@@ -14,6 +19,7 @@ export interface Info {
 @Component({
   selector: 'page-businessuser',
   templateUrl: 'businessuser.html',
+  providers: [Camera,FileTransfer, AngularFireStorage]
 })
 export class BusinessuserPage {
   /*info = {} as Info;*/
@@ -23,27 +29,41 @@ export class BusinessuserPage {
   cpfcnpj
   end
   tel
-  coords = [2];
+  coords
   database: any;
   cidades:any[]=[];
   estados:any[]=[];
   cat: any;
   key: any;
+  myPhotosRef: any;
+  myPhoto: any;
+  myPhotoURL: any;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public camera: Camera,
     private db: AngularFireDatabase,
-    private geolocation: Geolocation) {
+    public afAuth: AngularFireAuth,
+    ) {
+      this.myPhotosRef = firebase.storage().ref('/Photos/');
   }
-  
-salvar(nome, cpfcnpj, end, tel, estado, cidade, cat, coords) {
-  this.db.list('usuarios/'+localStorage.uid).update('info/salao', {
-    "nome": nome, cpfcnpj, end, tel, estado, cidade, cat, 
-    "coords":{
-      "lat": coords[0],
-      "lng": coords[1]
+  /*
+    ngOnInit(): void {
+      this.db.list('usuarios/'+localStorage.getItem('uid')).valueChanges().subscribe((info:any)=>{
+        this.info = info[0].profile;
+      })
     }
+
+    updateUser(){
+      this.db.list('usuários/'+localStorage.getItem('uid')+'/info/profile/').update("typeuser", {
+
+      })
+
+}*/
+salvar(nome, cpfcnpj, end, tel, estado, cidade, cat) {
+  this.db.list('usuarios/'+localStorage.uid).update('info/salao', {
+    "nome": nome, cpfcnpj, end, tel, estado, cidade, cat,
   }).then(()=>{
     this.db.list("usuarios/"+localStorage.uid+"/info").update('profile', {
       "typeuser": "empreendedor"
@@ -53,7 +73,6 @@ salvar(nome, cpfcnpj, end, tel, estado, cidade, cat, coords) {
 }
 
 ngOnInit() {
-  console.log(this.coords);
   this.db.list('estados').snapshotChanges().subscribe((estados)=>{
     estados.map((estado)=>{
       this.estados.push({
@@ -61,18 +80,7 @@ ngOnInit() {
         name: estado.payload.val().name
       })
     })
-  });
-}
-
-myLocation(){
-  this.geolocation.getCurrentPosition().then((resp) => {
-   this.coords[0] = resp.coords.latitude;
-    this.coords[1] = resp.coords.longitude;
-    console.log(this.coords[0]);
-    console.log(this.coords[1]);
-   }).catch((error) => {
-     console.log('Error getting location', error);
-   });
+  })
 }
 
 selectcity(event){
@@ -154,6 +162,51 @@ mudarCor(status) {
     this.btnvalidate = false
     this.warning = ""
   }
+}
+
+takePhoto() {
+  this.camera.getPicture({
+    quality: 100,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    sourceType: this.camera.PictureSourceType.CAMERA,
+    encodingType: this.camera.EncodingType.PNG,
+    saveToPhotoAlbum: true
+  }).then(imageData => {
+    this.myPhoto = imageData;
+    this.uploadPhoto();
+  }, error => {
+    console.log("ERROR -> " + JSON.stringify(error));
+  });
+}
+
+selectPhoto(): void {
+  this.camera.getPicture({
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    quality: 100,
+    encodingType: this.camera.EncodingType.PNG,
+  }).then(imageData => {
+    this.myPhoto = imageData;
+    this.uploadPhoto();
+  }, error => {
+    console.log("ERROR -> " + JSON.stringify(error));
+  });
+}
+
+private uploadPhoto(): void {
+  let d = new Date();
+  let title = d.getTime();
+
+  this.myPhotosRef.child(this.afAuth.auth.currentUser.uid).child(title+'.png')
+    .putString(this.myPhoto, 'base64', { contentType: 'image/png' })
+    .then((savedPicture) => {
+      savedPicture.ref.getDownloadURL()
+      .then(data => {
+        console.log(data)
+        this.myPhotoURL = data
+      });
+    
+    });
 }
 
 
