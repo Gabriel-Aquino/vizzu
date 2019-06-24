@@ -53,9 +53,9 @@ export class BusinessuserPage {
 
 
 
-salvar(nome, cpfcnpj, end, tel, estado, cidade, cat, coords) {
+salvar(nome, cpfcnpj, end, tel, estado, cidade, cat, coords, foto = this.myPhotoURL) {
   this.db.list('usuarios/'+localStorage.uid).update('info/salao', {
-    "nome": nome, cpfcnpj, end, tel, estado, cidade, cat,
+    "nome": nome, cpfcnpj, end, tel, estado, cidade, cat, foto,
     "coords":{
       "lat": coords[0],
       "lng": coords[1]
