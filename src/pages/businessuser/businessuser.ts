@@ -5,6 +5,7 @@ import { HomePage } from '../home/home';
 import { AngularFireStorage } from 'angularfire2/storage'
 import { AngularFireAuth } from 'angularfire2/auth';
 import firebase from 'firebase';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { Camera } from '@ionic-native/camera';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
@@ -29,7 +30,7 @@ export class BusinessuserPage {
   cpfcnpj
   end
   tel
-  coords
+  coords = [2];
   database: any;
   cidades:any[]=[];
   estados:any[]=[];
@@ -45,25 +46,20 @@ export class BusinessuserPage {
     public camera: Camera,
     private db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
+    private geolocation: Geolocation
     ) {
       this.myPhotosRef = firebase.storage().ref('/Photos/');
   }
-  /*
-    ngOnInit(): void {
-      this.db.list('usuarios/'+localStorage.getItem('uid')).valueChanges().subscribe((info:any)=>{
-        this.info = info[0].profile;
-      })
-    }
 
-    updateUser(){
-      this.db.list('usuários/'+localStorage.getItem('uid')+'/info/profile/').update("typeuser", {
 
-      })
 
-}*/
-salvar(nome, cpfcnpj, end, tel, estado, cidade, cat) {
+salvar(nome, cpfcnpj, end, tel, estado, cidade, cat, coords) {
   this.db.list('usuarios/'+localStorage.uid).update('info/salao', {
     "nome": nome, cpfcnpj, end, tel, estado, cidade, cat,
+    "coords":{
+      "lat": coords[0],
+      "lng": coords[1]
+    }
   }).then(()=>{
     this.db.list("usuarios/"+localStorage.uid+"/info").update('profile', {
       "typeuser": "empreendedor"
@@ -73,6 +69,7 @@ salvar(nome, cpfcnpj, end, tel, estado, cidade, cat) {
 }
 
 ngOnInit() {
+  console.log(this.coords)
   this.db.list('estados').snapshotChanges().subscribe((estados)=>{
     estados.map((estado)=>{
       this.estados.push({
@@ -81,6 +78,18 @@ ngOnInit() {
       })
     })
   })
+}
+
+
+myLocation(){
+  this.geolocation.getCurrentPosition().then((resp) => {
+    this.coords[0] = resp.coords.latitude;
+    this.coords[1] = resp.coords.longitude;
+    console.log(this.coords[0]);
+    console.log(this.coords[1]);
+   }).catch((error) => {
+     console.log('Error getting location', error);
+   });
 }
 
 selectcity(event){
