@@ -12,6 +12,7 @@
     <div class="content-form">
         <form>
             <ion-item>
+              <ion-label *ngIf="error" style="color: red; text-align: center"> Usuário ou senha incorretos!</ion-label>
                 <ion-label stacked>Digite seu e-mail</ion-label>
                 <ion-input class="form-input" type="email" placeholder="E-mail" #email></ion-input>
               </ion-item>

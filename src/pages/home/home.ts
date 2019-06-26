@@ -50,6 +50,26 @@ export class HomePage {
     });
   }
 
+  getDistanciaCoordenadas(p1LA, p1LO, p2LA, p2LO) {
+    var r = 6371.0;
+    var pi = Math.PI;
+    var dLat = null, dLong = null, a = null, c = null, s = null;
+
+    p1LA = p1LA * pi / 180.0;
+    p1LO = p1LO * pi / 180.0;
+    p2LA = p2LA * pi / 180.0;
+    p2LO = p2LO * pi / 180.0;
+
+    dLat = p2LA - p1LA;
+    dLong = p2LO - p1LO;
+
+    a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(p1LA) * Math.cos(p2LA) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    s = Math.round(r * c * 1000); /* resultado em metros */
+    return s;
+}
+
   maps() {
     this.navCtrl.push(MapsPage);
   }

@@ -161,11 +161,11 @@ TestaCPF(cpf: string) {
 mudarCor(status) {
   if (status == true) {
     this.btnvalidate = true
-    this.warning = "secondary"
+    this.warning = true
   }
   if (status == false) {
     this.btnvalidate = false
-    this.warning = "danger"
+    this.warning = false
   }
   if (status == null) {
     this.btnvalidate = false

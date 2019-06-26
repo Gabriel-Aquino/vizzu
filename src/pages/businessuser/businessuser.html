@@ -14,6 +14,7 @@
     <div class="filter">
 
         <ion-item>
+            <p style="color: gray">Insira uma foto do Estabelecimento</p>
             <ion-row>
               <ion-col width-50>
                 <button ion-button color="danger" type="button" full round large (click)="takePhoto()">
@@ -41,6 +42,7 @@
           <ion-item>
             <ion-label floating required>CPF/CNPJ</ion-label>
             <ion-input color="{{warning}}" type="text" [(ngModel)]="cpfcnpj" (ngModelChange)="TestaCPF($event)" [brmasker]="{person: true}">
+            <span *ngIf="warning == false" style="color: red">Insira um CPF válido!</span>
             </ion-input>
           </ion-item>
           <ion-item>

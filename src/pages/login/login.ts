@@ -16,7 +16,7 @@ export class LoginPage {
 typeUserFace: any;
 typeUserGoogle: any;
 pages: any;
-error: any;
+error: any = false;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -50,7 +50,7 @@ error: any;
             "isNewUser": false
           })
     }).catch((error)=>{
-      this.error = error;
+      this.error = true;
     })
   }
 
