@@ -4,12 +4,10 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { c } from '@angular/core/src/render3';
 import { AlertController } from 'ionic-angular';
 
-/**
- * Generated class for the MainAgendPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+export interface Info {
+  name: string;
+  picture: string;
+}
 
 @IonicPage()
 @Component({
@@ -17,9 +15,8 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'main-agend.html',
 })
 export class MainAgendPage {
-
+  info = {} as Info;
   agendamentos:any[];
-  nome;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -27,15 +24,15 @@ export class MainAgendPage {
     private alertCtrl: AlertController,
     ) {
       this.getAll();
-  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MainAgendPage');
+      this.db.list('usuarios/' + localStorage.getItem('uid')+'/info/').valueChanges().subscribe((info: any) => {
+        this.info.name = info[2].nome;
+        console.log(this.info.name);
+      });
   }
 
   getAll(){
     return this.db.object('agendamentos/'+localStorage.getItem('uid')).snapshotChanges().subscribe(data => {
-     
       this.agendamentos = Object.keys(data.payload.val()).map(arr=>{
         let agendamento = data.payload.val()[arr]
         agendamento["key"]=arr;
@@ -50,8 +47,6 @@ export class MainAgendPage {
        })
       })
       // console.log(this.agendamentos);
-
-    
     });
   }
 

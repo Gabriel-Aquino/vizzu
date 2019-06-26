@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { ModalroutePage } from '../modalroute/modalroute';
+
 
 declare let google;
 declare let MarkerWithLabel;
@@ -10,7 +12,7 @@ declare let MarkerWithLabel;
   templateUrl: 'maps.html',
 })
 export class MapsPage {
-  constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase, public modalCtrl: ModalController) {
   this.loadMaps();
   }
 
@@ -68,7 +70,11 @@ export class MapsPage {
                   
                 }
               });
-
+              let that = this;
+              marker.addListener('click', function(e) {
+              let modal = that.modalCtrl.create(ModalroutePage, { lat: user.payload.val().coords.lat, lng: user.payload.val().coords.lng })
+              modal.present();
+              });
             }
             
           })

@@ -1,7 +1,6 @@
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
 import { AngularFireStorage } from 'angularfire2/storage'
 import { AngularFireAuth } from 'angularfire2/auth';
 import firebase from 'firebase';
@@ -9,6 +8,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { Camera } from '@ionic-native/camera';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { MainAgendPage } from '../main-agend/main-agend';
 
 export interface Info {
   typeuser: string;
@@ -30,7 +30,8 @@ export class BusinessuserPage {
   cpfcnpj
   end
   tel
-  coords = [2];
+  lat: any;
+  lng: any;
   verifyCoords = false;
   database: any;
   cidades:any[]=[];
@@ -50,27 +51,55 @@ export class BusinessuserPage {
     private geolocation: Geolocation
     ) {
       this.myPhotosRef = firebase.storage().ref('/Photos/');
+
+      this.geolocation.getCurrentPosition().then((resp) => {
+        this.lat = resp.coords.latitude;
+        this.lng = resp.coords.longitude;
+        console.log(this.lat);
+        console.log(this.lng);
+       }).then(()=>{
+        this.verifyCoords = true;
+       }).catch((error) => {
+         console.log('Error getting location', error);
+       });
+       
   }
 
 
 
-salvar(nome, cpfcnpj, end, tel, estado, cidade, cat, coords, foto = this.myPhotoURL) {
+salvar(nome, cpfcnpj, end, tel, estado, cidade, cat, lat, lng, foto = this.myPhotoURL) {
+  if(foto != null){
   this.db.list('usuarios/'+localStorage.uid).update('info/salao', {
     "nome": nome, cpfcnpj, end, tel, estado, cidade, cat, foto,
     "coords":{
-      "lat": coords[0],
-      "lng": coords[1]
+      "lat": lat,
+      "lng": lng
     }
   }).then(()=>{
     this.db.list("usuarios/"+localStorage.uid+"/info").update('profile', {
       "typeuser": "empreendedor"
     });
-    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.setRoot(MainAgendPage);
   })
+}else{
+  this.db.list('usuarios/'+localStorage.uid).update('info/salao', {
+    "nome": nome, cpfcnpj, end, tel, estado, cidade, cat,
+    "coords":{
+      "lat": lat,
+      "lng": lng
+    }
+  }).then(()=>{
+    this.db.list("usuarios/"+localStorage.uid+"/info").update('profile', {
+      "typeuser": "empreendedor"
+    });
+    this.navCtrl.setRoot(MainAgendPage);
+  })
+}
 }
 
 ngOnInit() {
-  console.log(this.coords)
+  console.log(this.lat)
+  console.log(this.lng)
   this.db.list('estados').snapshotChanges().subscribe((estados)=>{
     estados.map((estado)=>{
       this.estados.push({
@@ -82,18 +111,18 @@ ngOnInit() {
 }
 
 
-myLocation(){
+/*myLocation(){
   this.geolocation.getCurrentPosition().then((resp) => {
-    this.coords[0] = resp.coords.latitude;
-    this.coords[1] = resp.coords.longitude;
-    console.log(this.coords[0]);
-    console.log(this.coords[1]);
+    this.lat = resp.coords.latitude;
+    this.lng = resp.coords.longitude;
+    console.log(this.lat);
+    console.log(this.lng);
    }).then(()=>{
     this.verifyCoords = true;
    }).catch((error) => {
      console.log('Error getting location', error);
    });
-}
+}*/
 
 selectcity(event){
   console.log(event)

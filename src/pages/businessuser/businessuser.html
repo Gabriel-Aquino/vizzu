@@ -33,11 +33,11 @@
       <ion-item *ngIf="myPhoto">
             <img class="img-responsive" src="data:image/png;base64,{{ myPhoto }}" />
       </ion-item>
-      <p style="color: red; text-align: center">**atenção: ao clicar em localização atual, será salvo o local que você está no momento**</p>
+      <!--p style="color: red; text-align: center">**atenção: ao clicar em localização atual, será salvo o local que você está no momento**</p>
       <ion-label class="loc-label">Utilizar localização atual para o salão</ion-label>
-        <button ion-button class="current-button" (click)="myLocation()">Localização atual</button>
-          <ion-input type="hidden" value="{{coords[0]}}"></ion-input>
-          <ion-input type="hidden" value="{{coords[1]}}"></ion-input>
+        <button ion-button class="current-button" (click)="myLocation()">Localização atual</button-->
+          <ion-input type="hidden" value="{{lat}}"></ion-input>
+          <ion-input type="hidden" value="{{lng}}"></ion-input>
           <ion-label style="color: green; text-align: center" *ngIf="verifyCoords != false">Localização salva!</ion-label>
 
         <ion-item>
@@ -80,7 +80,7 @@
           </ion-item>
         <br>
         <button ion-button full [disabled]="!btnvalidate" class="save-button"
-          (click)="salvar(nome, cpfcnpj, end, tel, state, city, cat, coords, foto)">SALVAR</button>
+          (click)="salvar(nome, cpfcnpj, end, tel, state, city, cat, lat, lng, foto)">SALVAR</button>
   </div>
 
 </ion-content>  

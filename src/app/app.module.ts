@@ -27,6 +27,8 @@ import { HistoricoAgendamentosPage } from '../pages/historico-agendamentos/histo
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ConsuAgendPage } from '../pages/consu-agend/consu-agend';
+import { ModalroutePage } from '../pages/modalroute/modalroute';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 
 export const firebaseConfig ={
@@ -52,7 +54,8 @@ export const firebaseConfig ={
     AgendamentoAddPage,
     HistoricoAgendamentosPage,
     CadastroPage,
-    ConsuAgendPage
+    ConsuAgendPage,
+    ModalroutePage
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ export const firebaseConfig ={
     AgendamentoAddPage,
     HistoricoAgendamentosPage,
     CadastroPage,
-    ConsuAgendPage
+    ConsuAgendPage,
+    ModalroutePage
   ],
   providers: [
     StatusBar,
@@ -84,7 +88,8 @@ export const firebaseConfig ={
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireAuth,
     AngularFireDatabase,
-    Geolocation
+    Geolocation,
+    LaunchNavigator
   ]
 })
 export class AppModule {}

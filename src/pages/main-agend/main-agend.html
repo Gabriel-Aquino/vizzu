@@ -3,11 +3,12 @@
       <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title class="text-nav">Seus Agendamentos</ion-title>
+        <ion-title class="text-nav">Agendamentos de {{info.name}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
 <ion-list *ngFor="let agend of agendamentos">
+  <ion-label style="color: gray; text-align: center">Para concluir um agendamento, arraste-o para a esquerda.</ion-label>
       <ion-item-sliding>
         <ion-item>
             <ion-label>{{agend.name}}</ion-label><ion-label>{{agend.horario}}0 horas</ion-label>
