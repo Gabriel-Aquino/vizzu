@@ -17,7 +17,7 @@ import { c } from '@angular/core/src/render3';
 })
 export class MainAgendPage {
 
-  agendamentos;
+  agendamentos:any[];
   nome;
 
   constructor(public navCtrl: NavController, 
@@ -33,11 +33,26 @@ export class MainAgendPage {
 
   getAll(){
     return this.db.object('agendamentos/'+localStorage.getItem('uid')).snapshotChanges().subscribe(data => {
-     console.log(data.payload.val())
-      this.agendamentos=Object.keys(data.payload.val()).map(arr=>{
-        return data.payload.val()[arr]
+     
+      this.agendamentos = Object.keys(data.payload.val()).map(arr=>{
+        let agendamento = data.payload.val()[arr]
+        agendamento["key"]=arr;
+        return agendamento;
       })
+
+      
+      this.agendamentos.forEach((agendamento,index)=>{
+        this.db.object("/usuarios/"+agendamento.cliente+"/info").snapshotChanges().subscribe((cliente)=>{
+          console.log(cliente.payload.val());
+          this.agendamentos[index]["name"] = cliente.payload.val().profile.name
+       })
+      })
+      // console.log(this.agendamentos);
+
+    
     });
   }
+
+
 
 }

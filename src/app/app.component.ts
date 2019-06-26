@@ -49,12 +49,12 @@ export class MyApp {
       if(localStorage.getItem("uid")){
       this.db.object('usuarios/' + localStorage.getItem("uid") + '/info/profile/').snapshotChanges().subscribe((type) => {
         let info = type.payload.val()
-        console.log(type.payload.val())
+        // console.log(type.payload.val())
         
          this.pageP = this.changeMenu(info.typeuser);
         
         
-        console.log(this.pageP);
+        // console.log(this.pageP);
 
         if (localStorage.getItem("uid") != null && localStorage.getItem("uid") && info.typeuser == "empreendedor") {
           this.rootPage = MainAgendPage;
