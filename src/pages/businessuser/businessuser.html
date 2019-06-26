@@ -1,85 +1,86 @@
 <ion-header>
-    <ion-navbar class="top-nav">
-  
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Cadastre seu Estabelecimento!</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-    <div class="content-top">
-    </div>
-    <div class="filter">
+  <ion-navbar class="top-nav">
+
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Cadastre seu Estabelecimento!</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="content-top">
+  </div>
+  <div class="filter">
+
+      <ion-item>
+          <p style="color: gray">Insira uma foto do Estabelecimento</p>
+          <ion-row>
+            <ion-col width-50>
+              <button ion-button color="danger" type="button" full round large (click)="takePhoto()">
+                          <ion-icon name="md-camera"></ion-icon>
+              </button>
+              <p text-center>Câmera</p>
+            </ion-col>
+            <ion-col width-50>
+              <button ion-button color="secondary" type="button" full round large (click)="selectPhoto()">
+                          <ion-icon name="md-image"></ion-icon>
+              </button>
+              <p text-center>Galeria</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      <ion-item *ngIf="myPhoto">
+            <img class="img-responsive" src="data:image/png;base64,{{ myPhoto }}" />
+      </ion-item>
+      <p style="color: red; text-align: center">**atenção: ao clicar em localização atual, será salvo o local que você está no momento**</p>
+      <ion-label class="loc-label">Utilizar localização atual para o salão</ion-label>
+        <button ion-button class="current-button" (click)="myLocation()">Localização atual</button>
+          <ion-input type="hidden" value="{{coords[0]}}"></ion-input>
+          <ion-input type="hidden" value="{{coords[1]}}"></ion-input>
+          <ion-label style="color: green; text-align: center" *ngIf="verifyCoords != false">Localização salva!</ion-label>
 
         <ion-item>
-            <p style="color: gray">Insira uma foto do Estabelecimento</p>
-            <ion-row>
-              <ion-col width-50>
-                <button ion-button color="danger" type="button" full round large (click)="takePhoto()">
-                            <ion-icon name="md-camera"></ion-icon>
-                </button>
-                <p text-center>Câmera</p>
-              </ion-col>
-              <ion-col width-50>
-                <button ion-button color="secondary" type="button" full round large (click)="selectPhoto()">
-                            <ion-icon name="md-image"></ion-icon>
-                </button>
-                <p text-center>Galeria</p>
-              </ion-col>
-            </ion-row>
-          </ion-item>
-        <ion-item *ngIf="myPhoto">
-              <img class="img-responsive" src="data:image/png;base64,{{ myPhoto }}" />
+          <ion-label floating required>Nome Fantasia</ion-label>
+          <ion-input class="input-form-cad" type="text" [(ngModel)]="nome" [brmasker]="{name: true}"></ion-input>
         </ion-item>
 
-          <ion-item>
-            <ion-label floating required>Nome Fantasia</ion-label>
-            <ion-input class="input-form-cad" type="text" [(ngModel)]="nome"></ion-input>
-          </ion-item>
-  
-          <ion-item>
-            <ion-label floating required>CPF/CNPJ</ion-label>
-            <ion-input color="{{warning}}" type="text" [(ngModel)]="cpfcnpj" (ngModelChange)="TestaCPF($event)" [brmasker]="{person: true}">
-            <span *ngIf="warning == false" style="color: red">Insira um CPF válido!</span>
-            </ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating>Endereço</ion-label>
-            <ion-input type="text" [(ngModel)]="end"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating required>Telefone</ion-label>
-            <ion-input type="text" [(ngModel)]="tel" [brmasker]="{phone: true}"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating required>Estado</ion-label>
-            <ion-select [(ngModel)]="state" (ionChange)="selectcity($event)">
-                <ion-option *ngFor="let estado of estados" value="{{estado.initial}}">{{estado.name}}</ion-option>
-              </ion-select>
-          </ion-item>
-          <ion-item>
-              <ion-label floating required>Cidade</ion-label>
-              <ion-select [(ngModel)]="city">
-              <ion-option *ngFor="let cidade of cidades" value="{{cidade.key}}" >{{cidade.name}}</ion-option>
+        <ion-item>
+          <ion-label floating required>CPF/CNPJ</ion-label>
+          <ion-input color="{{warning}}" type="text" [(ngModel)]="cpfcnpj" (ngModelChange)="TestaCPF($event)" [brmasker]="{person: true}">
+          <span *ngIf="warning != true" style="color: red">Insira um CPF válido!</span>
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Endereço</ion-label>
+          <ion-input type="text" [(ngModel)]="end"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating required>Telefone</ion-label>
+          <ion-input type="text" [(ngModel)]="tel" [brmasker]="{phone: true}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating required>Estado</ion-label>
+          <ion-select [(ngModel)]="state" (ionChange)="selectcity($event)">
+              <ion-option *ngFor="let estado of estados" value="{{estado.initial}}">{{estado.name}}</ion-option>
             </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label floating required>Categoria</ion-label>
-              <ion-select [(ngModel)]="cat">
-              <ion-option value="M">Masculino</ion-option>
-              <ion-option value="F">Feminino</ion-option>
-            </ion-select>
-            </ion-item>
-            <p style="color: red; text-align: center">**atenção: ao clicar em localização atual, será salvo o local que você está no momento**</p>
-            <ion-label class="loc-label">Utilizar localização atual para o salão</ion-label>
-              <button ion-button class="current-button" (click)="myLocation()">Localização atual</button>
-                <ion-input type="hidden" value="{{coords[0]}}"></ion-input>
-                <ion-input type="hidden" value="{{coords[1]}}"></ion-input>
-          <br>
-          <button ion-button full [disabled]="!btnvalidate" class="save-button"
-            (click)="salvar(nome, cpfcnpj, end, tel, state, city, cat, coords, foto)">SALVAR</button>
-    </div>
-  
-  </ion-content>  
+        </ion-item>
+        <ion-item>
+            <ion-label floating required>Cidade</ion-label>
+            <ion-select [(ngModel)]="city">
+            <ion-option *ngFor="let cidade of cidades" value="{{cidade.key}}" >{{cidade.name}}</ion-option>
+          </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label floating required>Categoria</ion-label>
+            <ion-select [(ngModel)]="cat">
+            <ion-option value="M">Masculino</ion-option>
+            <ion-option value="F">Feminino</ion-option>
+          </ion-select>
+          </ion-item>
+        <br>
+        <button ion-button full [disabled]="!btnvalidate" class="save-button"
+          (click)="salvar(nome, cpfcnpj, end, tel, state, city, cat, coords, foto)">SALVAR</button>
+  </div>
+
+</ion-content>  

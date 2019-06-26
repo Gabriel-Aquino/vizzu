@@ -31,6 +31,7 @@ export class BusinessuserPage {
   end
   tel
   coords = [2];
+  verifyCoords = false;
   database: any;
   cidades:any[]=[];
   estados:any[]=[];
@@ -87,6 +88,8 @@ myLocation(){
     this.coords[1] = resp.coords.longitude;
     console.log(this.coords[0]);
     console.log(this.coords[1]);
+   }).then(()=>{
+    this.verifyCoords = true;
    }).catch((error) => {
      console.log('Error getting location', error);
    });
