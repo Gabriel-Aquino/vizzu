@@ -50,17 +50,6 @@ export class MainAgendPage {
     });
   }
 
-/*   finalizar(key: string){
-
-    var adaRef = this.db.list("agendamentos/"+localStorage.getItem('uid'))
-    adaRef.remove(key)
-    .then(function() {
-      console.log("Agendamento finalizado com sucesso.")
-    })
-    .catch(function(error) {
-      console.log("Falha ao finalizar: " + error.message)
-    });
-   }*/
 
   finalizar(key) {
 
@@ -79,8 +68,6 @@ export class MainAgendPage {
           handler: () => {
 
              this.db.list("agendamentos/"+localStorage.getItem('uid')).remove(key)
-          
-            this.navCtrl.pop();
           }
         }
       ]

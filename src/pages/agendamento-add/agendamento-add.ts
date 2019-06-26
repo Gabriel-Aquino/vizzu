@@ -72,6 +72,8 @@ export class AgendamentoAddPage {
             this.db.list('agendamentos/'+this.salao.key).push(dados)
             .then((result: any) => {
               console.log(result.key);
+
+              this.db.list("usuarios/"+dados.cliente+"/info/agendamentos").push(result.key);
             });
           
             this.navCtrl.pop();
