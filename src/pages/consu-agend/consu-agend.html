@@ -8,9 +8,13 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-label>{{salao}}</ion-label>
+
+  <div *ngFor="let salao of saloes" style="text-align:center;">
+      <ion-label>{{salao.nome}}</ion-label>
     <ion-item>
-        <ion-label>{{cliente.data}}</ion-label><ion-label>{{cliente.horario}}0 horas</ion-label>
+        <ion-label>{{salao.data}}</ion-label><ion-label>{{salao.horario}}0 horas</ion-label>
     </ion-item>
+  </div>
+    
         
 </ion-content>
