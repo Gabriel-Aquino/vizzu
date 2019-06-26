@@ -26,6 +26,7 @@ import { AgendamentoAddPage } from '../pages/agendamento-add/agendamento-add';
 import { HistoricoAgendamentosPage } from '../pages/historico-agendamentos/historico-agendamentos';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { Geolocation } from '@ionic-native/geolocation';
+import { ConsuAgendPage } from '../pages/consu-agend/consu-agend';
 
 
 export const firebaseConfig ={
@@ -50,7 +51,8 @@ export const firebaseConfig ={
     MainAgendPage,
     AgendamentoAddPage,
     HistoricoAgendamentosPage,
-    CadastroPage
+    CadastroPage,
+    ConsuAgendPage
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,8 @@ export const firebaseConfig ={
     MainAgendPage,
     AgendamentoAddPage,
     HistoricoAgendamentosPage,
-    CadastroPage
+    CadastroPage,
+    ConsuAgendPage
   ],
   providers: [
     StatusBar,

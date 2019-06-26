@@ -1,14 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { c } from '@angular/core/src/render3';
-
-/**
- * Generated class for the MainAgendPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -25,10 +17,6 @@ export class MainAgendPage {
     private db: AngularFireDatabase,
     ) {
       this.getAll();
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MainAgendPage');
   }
 
   getAll(){

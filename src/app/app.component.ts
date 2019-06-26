@@ -11,6 +11,7 @@ import { LoginPage } from './../pages/login/login';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { MainAgendPage } from '../pages/main-agend/main-agend';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { ConsuAgendPage } from '../pages/consu-agend/consu-agend';
 
 
 export interface Info {
@@ -49,12 +50,12 @@ export class MyApp {
       if(localStorage.getItem("uid")){
       this.db.object('usuarios/' + localStorage.getItem("uid") + '/info/profile/').snapshotChanges().subscribe((type) => {
         let info = type.payload.val()
-        // console.log(type.payload.val())
+        console.log(type.payload.val())
         
          this.pageP = this.changeMenu(info.typeuser);
         
         
-        // console.log(this.pageP);
+        console.log(this.pageP);
 
         if (localStorage.getItem("uid") != null && localStorage.getItem("uid") && info.typeuser == "empreendedor") {
           this.rootPage = MainAgendPage;
@@ -101,6 +102,7 @@ export class MyApp {
     let consumidor = [
       { title: 'Home', component: HomePage },
       { title: 'Comece seu negocio!', component: BusinessuserPage },
+      { title: 'Meus agendamentos', component: ConsuAgendPage},
       { title: 'Sair!', component: SignOutPage }
     ];
 

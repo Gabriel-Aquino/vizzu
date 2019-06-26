@@ -9,7 +9,6 @@ declare let google;
   templateUrl: 'maps.html',
 })
 export class MapsPage {
-
   constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase) {
   this.loadMaps();
   }
@@ -49,7 +48,7 @@ export class MapsPage {
               var markerSalon = new google.maps.Marker({
                 position: {lat: user.payload.val().coords.lat, lng: user.payload.val().coords.lng},
                 map: maps,
-                icon: '/assets/imgs/map-marker1.png',
+                //icon: '/assets/imgs/map-marker1.png',
                 title: user.payload.val().nome
               });
             }
