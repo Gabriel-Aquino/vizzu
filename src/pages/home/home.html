@@ -37,7 +37,7 @@
         <button *ngFor="let list of database"
         (click)="salaoSelected(list)">
               <ion-item>
-                <img class="img-salon" src="/assets/imgs/salao.jpg">
+                <img class="img-salon" src="{{list.items.info.salao.foto}}">
               <p class="card-subtitle-2">{{list.items.info.salao.nome}}</p> 
               <p class="card-subtitle"><b>Endereço: </b>{{list.items.info.salao.end}}</p>
               <p class="card-subtitle"><b>Contato: </b>{{list.items.info.salao.tel}}</p>
