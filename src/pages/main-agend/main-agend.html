@@ -8,10 +8,15 @@
 </ion-header>
 <ion-content>
 <ion-list *ngFor="let agend of agendamentos">
-  <ion-item>
-    <ion-label>{{agend.data}}</ion-label>
-    <ion-label>{{agend.horario}}0</ion-label>
-    <ion-label>{{agend.name}}</ion-label>
-  </ion-item>
+      <ion-item-sliding>
+        <ion-item>
+            <ion-label>{{agend.name}}</ion-label><ion-label>{{agend.horario}}0 horas</ion-label>
+        </ion-item>
+            <ion-item-options side ="right">
+              <button  ion-button color="secondary" (click)="finalizar(agend.key)">
+                <ion-icon name="md-checkmark-circle"></ion-icon>
+              </button>
+            </ion-item-options>
+      </ion-item-sliding>
   </ion-list>
 </ion-content>
