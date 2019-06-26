@@ -28,18 +28,17 @@ export class MapsPage {
       //     maps.panTo(marker.getPosition());
       //   }, 5000);
       // });
-      // var marker = new google.maps.Marker(
-      //   {
-      //     position: {lat:pos.coords.latitude, lng:pos.coords.longitude}, 
-      //     map:maps,
-      //     // icon: '/assets/imgs/map-marker.png',
+       var marker = new google.maps.Marker({
+        position: {lat:pos.coords.latitude, lng:pos.coords.longitude}, 
+        map:maps,
+        icon: '/assets/imgs/map-marker.png',
       //     title: 'Click to zoom'
-      //   }
+       //}
         // );
         // marker.addListener('click', function() {
         //   maps.setZoom(18);
         //   maps.setCenter(marker.getPosition());
-        // });
+         });
 
       this.db.list("usuarios/").snapshotChanges().subscribe((users)=>{
         for(var i = 0; i < users.length; i++){
