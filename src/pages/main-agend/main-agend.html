@@ -7,5 +7,10 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-
+<ion-list *ngFor="let agend of agendamentos">
+  <ion-item>
+    <ion-label>{{agend.data}}</ion-label>
+    <ion-label>{{agend.horario}}0</ion-label>
+  </ion-item>
+  </ion-list>
 </ion-content>

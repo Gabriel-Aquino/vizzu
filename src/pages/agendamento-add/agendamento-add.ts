@@ -65,7 +65,7 @@ export class AgendamentoAddPage {
           handler: () => {
             let dados = {
               salao: this.salao.key,
-              horario: date.value,
+              horario: date.value.hour + ":" + date.value.minute,
               cliente: localStorage.getItem('uid'),
               data: this.data
             }
